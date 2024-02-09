@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://34o43kry1nf7"]
+
+[sub_resource type="GDScript" id="GDScript_ko8t8"]
+resource_name = "sprites_and_timers"
+script/source = "extends Node2D
+
+@export var Ship : CharacterBody2D
+@onready var shield_sprite = $shield
+@onready var shield_timer = $shield_timer
+@onready var turbo_take_timer = $turbo_take_timer
+@onready var shoot_cooldown = $shoot_cooldown
+
+
+
+var shields : Dictionary = {
+	1 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield1.png\"),
+	2 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield2.png\"),
+	3 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield3.png\")
+}
+
+func _ready():
+	shield_sprite.texture = null
+
+func _on_shield_timer_timeout():
+	Ship.have_shield = false
+	shield_sprite.texture = null
+
+
+func _on_shoot_cooldown_timeout():
+	Ship.shoot_cooldown = true
+
+
+func _on_turbo_take_timer_timeout():
+	Ship.take_turbo_gas = false
+	Ship.turbo -= 1
+
+func give_shield(type : int):
+	print_debug(\"Shield is recieved \", type)
+	shield_sprite.texture = shields[type]
+	
+"
+
+[node name="ship_timers_&_sprites" type="Node2D"]
+script = SubResource("GDScript_ko8t8")
+
+[node name="shield_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="shield" type="Sprite2D" parent="."]
+rotation = 1.5708
+
+[node name="turbo_take_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="shoot_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]

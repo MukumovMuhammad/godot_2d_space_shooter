@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnhgrpobwmvs8"]
+
+[ext_resource type="Texture2D" uid="uid://d1i1mq8steeg2" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlack1.png" id="1_6a8a2"]
+[ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="2_djjfl"]
+[ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="3_lduok"]
+
+[sub_resource type="GDScript" id="GDScript_7jqws"]
+script/source = "extends ship
+@onready var muzzle = $muzzle
+
+var player_see : bool = false
+@export var Player : CharacterBody2D
+
+func _ready():
+	timers = $\"ship_timers_&_sprites\"
+	class_ready()
+
+
+func _physics_process(delta):
+	if player_see and Player:
+		look_at(Player.position)
+		move_to_forward(2)
+		if can_shoot:
+			print_debug(\"The enemy shoot\")
+			shoot(muzzle)
+	else:
+		move_to_forward(0)
+	
+	move_and_slide()
+
+
+
+
+func _on_detecting_area_body_entered(body):
+	print_debug(\"Saw sth \",body)
+	if body.is_in_group(\"Player\"):
+		#Player = body.global_position
+		player_see = true
+
+
+func _on_detecting_area_body_exited(body):
+	print_debug(\"sth exited  \",body)
+	if body.is_in_group(\"Player\"):
+		#Player = body.global_position
+		player_see = false
+
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogyqm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6a8a2")
+}],
+"loop": true,
+"name": &"simple",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_un63l"]
+radius = 42.4264
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h6rp6"]
+radius = 352.278
+
+[node name="enemy" type="CharacterBody2D" groups=["ship"]]
+collision_layer = 2
+collision_mask = 6
+script = SubResource("GDScript_7jqws")
+speed = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_ogyqm")
+animation = &"simple"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_un63l")
+
+[node name="hit_area" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("2_djjfl")]
+visible = false
+scale = Vector2(1.54, 1.77)
+collision_layer = 2
+collision_mask = 6
+Ship = NodePath("..")
+
+[node name="ship_timers_&_sprites" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_lduok")]
+Ship = NodePath("..")
+wait_times = {
+"shield": 5,
+"shoot": 2.0,
+"turbo": 0.1
+}
+
+[node name="Detecting_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detecting_area"]
+shape = SubResource("CircleShape2D_h6rp6")
+
+[node name="muzzle" type="Node2D" parent="."]
+position = Vector2(50, 0)
+
+[connection signal="body_entered" from="Detecting_area" to="." method="_on_detecting_area_body_entered"]
+[connection signal="body_exited" from="Detecting_area" to="." method="_on_detecting_area_body_exited"]

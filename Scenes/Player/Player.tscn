@@ -1,19 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfituemdujrmu"]
+[gd_scene load_steps=8 format=3 uid="uid://cfituemdujrmu"]
 
-[ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Ship_component.tscn" id="1_o5gx6"]
+[ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="1_o5gx6"]
 [ext_resource type="Texture2D" uid="uid://61fcdq315jyg" path="res://essets/kenney_space-shooter-redux/PNG/playerShip3_blue.png" id="1_s7uge"]
-[ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://hit_area.tscn" id="3_iyree"]
+[ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="3_iyree"]
+[ext_resource type="PackedScene" uid="uid://b1jjonrbn5n02" path="res://Scenes/HUD.tscn" id="4_oqy40"]
 
 [sub_resource type="GDScript" id="GDScript_jpu6n"]
 script/source = "extends ship
 
+func _ready():
+	max_life = 5
+	print_debug(\"The child's ready\")
+	timers = $Timers
+	class_ready()
+
+@onready var muzzle = $muzzle
+func _process(delta):
+	if Input.is_action_pressed(\"space\"):
+		shoot(muzzle)
+	if Input.is_action_just_pressed(\"mouse_left\") and can_shoot:
+		print_debug(\"The rotation of player is \" , self.rotation)
+		look_at(get_global_mouse_position())
+		shoot(muzzle)
+
+
 func _physics_process(delta):
-	move_to(Input.get_axis(\"down\", \"up\"))
+	move_to_forward(Input.get_axis(\"down\", \"up\"))
 	ship_rotate(Input.get_axis(\"left\", \"right\"))
+	#move_to_sides(Input.get_axis(\"left\", \"right\"))
+	
+	#muzzle.look_at(get_global_mouse_position())
 	if Input.is_action_pressed(\"turbo\"):
 		turbo_move()
+	
+	
 	move_and_slide()
-
 
 "
 
@@ -32,12 +53,14 @@ animations = [{
 radius = 32.0
 height = 94.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("timers") groups=["ship"]]
+[node name="Player" type="CharacterBody2D" groups=["Player", "ship"]]
+collision_layer = 4
+collision_mask = 2
 script = SubResource("GDScript_jpu6n")
-timers = NodePath("Timers")
+rotation_speed = 15.0
+speed = 500.0
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -3)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_0cce1")
 animation = &"idle"
@@ -53,6 +76,14 @@ Ship = NodePath("..")
 
 [node name="hit_area" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_iyree")]
 position = Vector2(-1.99, -2)
-rotation = 1.5708
 scale = Vector2(1.46, 1.55)
+collision_layer = 2
+collision_mask = 2
 Ship = NodePath("..")
+
+[node name="muzzle" type="Node2D" parent="."]
+position = Vector2(50, 0)
+
+[node name="HUD" parent="." instance=ExtResource("4_oqy40")]
+
+[connection signal="lifes_left" from="." to="HUD" method="_on_player_lifes_left"]

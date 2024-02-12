@@ -11,6 +11,8 @@ func _on_body_entered(body):
 
 
 func _on_area_entered(area):
+	if area.is_in_group("laser"):
+		Ship.take_demage(area.hit_demage)
 	if area.is_in_group("shield"):
 		Ship.trigger_shield(1)
 		#print("Shield was triggered")

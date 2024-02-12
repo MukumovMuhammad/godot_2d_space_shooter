@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=3 uid="uid://34o43kry1nf7"]
+
+[ext_resource type="Texture2D" uid="uid://dh6lbn45boggi" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire04.png" id="1_55f7l"]
+[ext_resource type="Texture2D" uid="uid://bwlegwameu257" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire05.png" id="1_a4cux"]
+[ext_resource type="Texture2D" uid="uid://c6mh1xpsqy15o" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire01.png" id="1_aocgb"]
+
+[sub_resource type="GDScript" id="GDScript_ko8t8"]
+resource_name = "sprites_and_timers"
+script/source = "extends Node2D
+
+@export var Ship : CharacterBody2D
+@onready var shield_sprite = $shield
+@onready var shield_timer = $shield_timer
+@onready var turbo_take_timer = $turbo_take_timer
+@onready var shoot_cooldown = $shoot_cooldown
+@onready var turbo = $turbo
+
+@export_category(\"Timers\")
+
+@export var wait_times : Dictionary = {
+	\"shield\" : 5,
+	\"turbo\" : 0.1,
+	\"shoot\" : 0.5
+}
+
+var shields : Dictionary = {
+	1 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield1.png\"),
+	2 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield2.png\"),
+	3 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield3.png\")
+}
+
+
+func _process(delta):
+	if Ship.take_turbo_gas:
+		turbo.show()
+		turbo.play(\"turbo\")
+	else:
+		turbo.hide()
+
+func _ready():
+	shield_sprite.texture = null
+	shield_timer.wait_time = wait_times[\"shield\"]
+	turbo_take_timer.wait_time = wait_times[\"turbo\"]
+	shoot_cooldown.wait_time = wait_times[\"shoot\"]
+
+
+
+func _on_shield_timer_timeout():
+	Ship.have_shield = false
+	shield_sprite.texture = null
+
+
+func _on_shoot_cooldown_timeout():
+	Ship.can_shoot = true
+
+
+func _on_turbo_take_timer_timeout():
+	print_debug(\"Turbo left \", Ship.turbo)
+	Ship.turbo -= 1
+	Ship.take_turbo_gas = false
+	
+
+
+func give_shield(type : int):
+	print_debug(\"Shield is recieved \", type)
+	shield_sprite.texture = shields[type]
+	
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rip5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a4cux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_55f7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_aocgb")
+}],
+"loop": false,
+"name": &"turbo",
+"speed": 5.0
+}]
+
+[node name="ship_timers_&_sprites" type="Node2D"]
+script = SubResource("GDScript_ko8t8")
+
+[node name="shield_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="shield" type="Sprite2D" parent="."]
+rotation = 1.5708
+
+[node name="turbo_take_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="shoot_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="turbo" type="AnimatedSprite2D" parent="."]
+position = Vector2(-55, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_rip5h")
+animation = &"turbo"
+autoplay = "turbo"
+frame = 2
+frame_progress = 1.0
+
+[connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="turbo_take_timer" to="." method="_on_turbo_take_timer_timeout"]
+[connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]

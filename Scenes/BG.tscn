@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbruw83qw7lhy"]
+
+[ext_resource type="Texture2D" uid="uid://61kh5nmjkfhg" path="res://essets/kenney_space-shooter-redux/Backgrounds/blue.png" id="1_khtp8"]
+
+[sub_resource type="GDScript" id="GDScript_15qh4"]
+script/source = "extends ParallaxBackground
+
+var scrolling_speed = 50
+
+
+func _process(delta):
+	scroll_offset.x -= scrolling_speed * delta
+	
+"
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = SubResource("GDScript_15qh4")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(500, 500)
+
+[node name="Blue" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(130, 131)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue2" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(386, 131)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue3" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(132, 385)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue4" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(388, 385)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue5" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(640, 131)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue6" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(896, 131)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue7" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(642, 385)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue8" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(898, 385)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue9" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1151, 129)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue10" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1153, 383)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue11" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-123, 129)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue12" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-121, 383)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue13" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(134, 634)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue14" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(390, 634)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue15" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(644, 634)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue16" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(900, 634)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue17" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1155, 632)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue18" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-119, 632)
+texture = ExtResource("1_khtp8")

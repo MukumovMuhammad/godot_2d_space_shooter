@@ -1,11 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr1jo83okavg5"]
+[gd_scene load_steps=5 format=3 uid="uid://dr1jo83okavg5"]
 
 [ext_resource type="PackedScene" uid="uid://cfituemdujrmu" path="res://Scenes/Player/Player.tscn" id="1_75my0"]
 [ext_resource type="PackedScene" uid="uid://d4budg00why4f" path="res://Scenes/Objects/start.tscn" id="2_6tbv3"]
+[ext_resource type="PackedScene" uid="uid://cnhgrpobwmvs8" path="res://Scenes/enemy/simple_enemy.tscn" id="3_1v350"]
+[ext_resource type="PackedScene" uid="uid://cbruw83qw7lhy" path="res://Scenes/BG.tscn" id="4_k0nsa"]
 
 [node name="Test_World" type="Node2D"]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("4_k0nsa")]
 
 [node name="Start" parent="." instance=ExtResource("2_6tbv3")]
 position = Vector2(775, 166)
 
+[node name="Start2" parent="." instance=ExtResource("2_6tbv3")]
+position = Vector2(1329, -82)
+
+[node name="Start3" parent="." instance=ExtResource("2_6tbv3")]
+position = Vector2(-617, -235)
+
+[node name="enemy" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_1v350")]
+position = Vector2(601, 618)
+Player = NodePath("../Player")
+
+[node name="enemy5" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_1v350")]
+position = Vector2(-160, 969)
+Player = NodePath("../Player")
+
+[node name="enemy2" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_1v350")]
+position = Vector2(600, -264)
+Player = NodePath("../Player")
+
+[node name="enemy3" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_1v350")]
+position = Vector2(-264, -455)
+Player = NodePath("../Player")
+
+[node name="enemy4" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_1v350")]
+position = Vector2(-736, 292)
+Player = NodePath("../Player")
+
 [node name="Player" parent="." instance=ExtResource("1_75my0")]
+position = Vector2(45, 55)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]

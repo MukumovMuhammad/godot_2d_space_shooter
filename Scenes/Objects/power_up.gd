@@ -1,11 +1,35 @@
 extends Area2D
 
-@export var self_destroy : bool = true
+@export var can_destroy : bool = true
+@onready var sprite_2d = $Sprite2D
+
+@export var power_up : Dictionary ={
+	"shield" : true,
+	"gas" : true,
+	"armo" : true
+}
+
+var gas_amount := 20
+
+var icons : Dictionary = {
+	"shield" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_shield.png"),
+	"gas" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_bolt.png"),
+	"armo" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_star.png")
+}
+var the_power_up
+
+func _ready():
+	sprite_2d.texture = null
+	print_debug("---------------------------")
+	for i in power_up:
+		if power_up[i]:
+			the_power_up = i
+			sprite_2d.texture = icons[i]
+	
+	print_debug("the power up ", the_power_up)
 
 
 
-
-func _on_body_entered(body):
-	if body.is_in_group("ship"):
-		if self_destroy:
+func self_destroy():
+	if self_destroy:
 			self.queue_free()

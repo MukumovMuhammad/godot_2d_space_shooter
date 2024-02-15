@@ -3,10 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://cbm0aerhn1jbv" path="res://essets/kenney_space-shooter-redux/PNG/playerShip1_blue.png" id="1_ytyf3"]
 
 [node name="ships" type="Panel"]
-self_modulate = Color(1, 1, 1, 0)
-size_flags_horizontal = 3
+custom_minimum_size = Vector2(0.27, 0)
+anchors_preset = -1
+anchor_right = 0.06
+anchor_bottom = 0.076
+offset_right = -5.12
+offset_bottom = 0.751995
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PlayerShip1Blue" type="Sprite2D" parent="."]
-position = Vector2(31, 25)
+position = Vector2(32, 24)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ytyf3")

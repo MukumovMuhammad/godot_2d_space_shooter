@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4gj3k14gp4qq"]
+
+[ext_resource type="Texture2D" uid="uid://btbsa0wil62e7" path="res://essets/kenney_space-shooter-redux/PNG/ufoRed.png" id="1_qilg7"]
+
+[node name="Panel" type="Node2D"]
+
+[node name="UfoRed" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_qilg7")

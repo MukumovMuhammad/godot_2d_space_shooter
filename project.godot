@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Space Shooter"
-run/main_scene="res://Scenes/Test_World.tscn"
+run/main_scene="res://Scenes/levels/Test_World.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://essets/kenney_space-shooter-redux/PNG/playerShip3_blue.png"
 
@@ -59,6 +59,11 @@ space={
 mouse_left={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(211, 10),"global_position":Vector2(215, 53),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":true,"script":null)
+]
+}
+right_mouse={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(182, 15),"global_position":Vector2(186, 58),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 

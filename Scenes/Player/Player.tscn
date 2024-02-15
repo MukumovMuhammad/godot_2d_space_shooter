@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfituemdujrmu"]
+[gd_scene load_steps=7 format=3 uid="uid://cfituemdujrmu"]
 
 [ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="1_o5gx6"]
 [ext_resource type="Texture2D" uid="uid://61fcdq315jyg" path="res://essets/kenney_space-shooter-redux/PNG/playerShip3_blue.png" id="1_s7uge"]
 [ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="3_iyree"]
-[ext_resource type="PackedScene" uid="uid://b1jjonrbn5n02" path="res://Scenes/HUD.tscn" id="4_oqy40"]
 
 [sub_resource type="GDScript" id="GDScript_jpu6n"]
 script/source = "extends ship
 
 func _ready():
-	max_life = 5
+	max_life = 10
 	print_debug(\"The child's ready\")
 	timers = $Timers
 	class_ready()
@@ -22,6 +21,10 @@ func _process(delta):
 		print_debug(\"The rotation of player is \" , self.rotation)
 		look_at(get_global_mouse_position())
 		shoot(muzzle)
+	
+	if Input.is_action_just_pressed(\"right_mouse\"):
+		var _dis = abs(global_position - get_global_mouse_position())
+		print_debug(\"The distance is \", _dis)
 
 
 func _physics_process(delta):
@@ -75,6 +78,7 @@ shape = SubResource("CapsuleShape2D_xpks5")
 Ship = NodePath("..")
 
 [node name="hit_area" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_iyree")]
+visible = false
 position = Vector2(-1.99, -2)
 scale = Vector2(1.46, 1.55)
 collision_layer = 2
@@ -83,7 +87,3 @@ Ship = NodePath("..")
 
 [node name="muzzle" type="Node2D" parent="."]
 position = Vector2(50, 0)
-
-[node name="HUD" parent="." instance=ExtResource("4_oqy40")]
-
-[connection signal="lifes_left" from="." to="HUD" method="_on_player_lifes_left"]

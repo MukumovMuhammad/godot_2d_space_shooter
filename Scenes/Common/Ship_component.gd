@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name ship
 signal took_demage(demage : int)
 signal lifes_left(lifes : int)
-
+signal turbo_left(gas : float)
 
 var laser := preload("res://Scenes/Common/laser.tscn")
 
@@ -46,10 +46,11 @@ func ship_rotate(where : int):
 
 
 func turbo_move():
-	if turbo > 0:
+	if turbo > -1:
 		velocity = transform.x * turbo_speed
 		if !take_turbo_gas:
 			timers.turbo_take_timer.start()
+			turbo_left.emit(turbo)
 			take_turbo_gas = true
 			print_debug("The timer for turbo activated ")
 	else:

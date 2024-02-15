@@ -9,7 +9,9 @@ script/source = "extends ship
 @onready var muzzle = $muzzle
 
 var player_see : bool = false
-@export var Player : CharacterBody2D
+var Player : CharacterBody2D
+@export var max_distance : float = 600.0
+@export var min_distance : float = 200.0
 
 func _ready():
 	timers = $\"ship_timers_&_sprites\"
@@ -19,9 +21,14 @@ func _ready():
 func _physics_process(delta):
 	if player_see and Player:
 		look_at(Player.position)
-		move_to_forward(2)
+		var dis = get_distnance(global_position, Player.global_position)
+		#print_debug(\"The anemy and player distance is \", dis)
+		if dis < max_distance and dis > min_distance:
+			move_to_forward(2)
+		else:
+			move_to_forward(0)
 		if can_shoot:
-			print_debug(\"The enemy shoot\")
+			#print_debug(\"The enemy shoot\")
 			shoot(muzzle)
 	else:
 		move_to_forward(0)
@@ -36,6 +43,7 @@ func _on_detecting_area_body_entered(body):
 	if body.is_in_group(\"Player\"):
 		#Player = body.global_position
 		player_see = true
+		Player = body
 
 
 func _on_detecting_area_body_exited(body):
@@ -44,6 +52,9 @@ func _on_detecting_area_body_exited(body):
 		#Player = body.global_position
 		player_see = false
 
+func get_distnance(pos1 : Vector2, pos2 : Vector2):
+	var _dis = sqrt(pow(pos2.x - pos1.x,2) + pow(pos2.y - pos1.y,2))
+	return _dis
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ogyqm"]

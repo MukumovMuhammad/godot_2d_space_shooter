@@ -5,16 +5,18 @@ extends Area2D
 
 @export var power_up : Dictionary ={
 	"shield" : true,
-	"gas" : true,
-	"armo" : true
+	"gas" : false,
+	#"armo" : false,
+	"life" : false
 }
 
 var gas_amount := 20
-
+var life_amount := 2
 var icons : Dictionary = {
 	"shield" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_shield.png"),
 	"gas" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_bolt.png"),
-	"armo" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_star.png")
+	#"armo" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/powerupBlue_star.png"),
+	"life" : preload("res://essets/kenney_space-shooter-redux/PNG/Power-ups/pill_blue.png")
 }
 var the_power_up
 

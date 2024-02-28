@@ -2,7 +2,7 @@ extends Control
 @onready var h_box_container = $CanvasLayer/HBoxContainer
 var max_distance := 600
 var in_show_dis := 300
-@export var Enemies : Node
+@export var Enemies : Node2D
 var heart_ship = preload("res://Scenes/UI/life_ship.tscn")
 @onready var progress_bar = $CanvasLayer/ProgressBar
 var enemy = preload("res://Scenes/UI/enemy_icon.tscn")
@@ -38,6 +38,7 @@ func _process(delta):
 		if i > 4:
 			i = 0
 	i = 0
+
 
 func set_max_heart(_max : int):
 	print_debug("setting max heart")

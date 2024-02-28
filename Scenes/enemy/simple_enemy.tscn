@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnhgrpobwmvs8"]
+[gd_scene load_steps=9 format=3 uid="uid://cnhgrpobwmvs8"]
 
 [ext_resource type="Texture2D" uid="uid://d1i1mq8steeg2" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlack1.png" id="1_6a8a2"]
+[ext_resource type="Texture2D" uid="uid://u00ciwxwdgq7" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyGreen2.png" id="1_bn5dd"]
 [ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="2_djjfl"]
 [ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="3_lduok"]
 
@@ -12,6 +13,7 @@ var player_see : bool = false
 var Player : CharacterBody2D
 @export var max_distance : float = 600.0
 @export var min_distance : float = 200.0
+var too_min_distance : float = 100.0
 
 func _ready():
 	timers = $\"ship_timers_&_sprites\"
@@ -23,8 +25,17 @@ func _physics_process(delta):
 		look_at(Player.position)
 		var dis = get_distnance(global_position, Player.global_position)
 		#print_debug(\"The anemy and player distance is \", dis)
-		if dis < max_distance and dis > min_distance:
+		if dis < max_distance:
 			move_to_forward(2)
+			if dis < min_distance:
+				move_to_forward(0)
+				var _r = 1
+				move_to_sides(_r)
+				if dis < too_min_distance:
+					move_to_sides(0)
+					move_to_forward(-5)
+					
+			
 		else:
 			move_to_forward(0)
 		if can_shoot:
@@ -60,6 +71,9 @@ func get_distnance(pos1 : Vector2, pos2 : Vector2):
 [sub_resource type="SpriteFrames" id="SpriteFrames_ogyqm"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bn5dd")
+}, {
 "duration": 1.0,
 "texture": ExtResource("1_6a8a2")
 }],
@@ -97,6 +111,7 @@ collision_mask = 6
 Ship = NodePath("..")
 
 [node name="ship_timers_&_sprites" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_lduok")]
+position = Vector2(15, 0)
 Ship = NodePath("..")
 wait_times = {
 "shield": 5,
@@ -105,6 +120,7 @@ wait_times = {
 }
 
 [node name="Detecting_area" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 6
 

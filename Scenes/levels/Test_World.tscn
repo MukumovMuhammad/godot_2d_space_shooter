@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dr1jo83okavg5"]
 
 [ext_resource type="PackedScene" uid="uid://cfituemdujrmu" path="res://Scenes/Player/Player.tscn" id="1_75my0"]
-[ext_resource type="PackedScene" uid="uid://d4budg00why4f" path="res://Scenes/Objects/start.tscn" id="2_6tbv3"]
+[ext_resource type="PackedScene" uid="uid://d4budg00why4f" path="res://Scenes/Objects/power_up.tscn" id="2_6tbv3"]
 [ext_resource type="PackedScene" uid="uid://cnhgrpobwmvs8" path="res://Scenes/enemy/simple_enemy.tscn" id="3_1v350"]
 [ext_resource type="PackedScene" uid="uid://b1jjonrbn5n02" path="res://Scenes/UI/HUD.tscn" id="4_fu32m"]
 [ext_resource type="PackedScene" uid="uid://cbruw83qw7lhy" path="res://Scenes/levels/BG.tscn" id="4_k0nsa"]
@@ -14,7 +14,8 @@
 position = Vector2(775, 166)
 power_up = {
 "armo": false,
-"gas": true,
+"gas": false,
+"life": true,
 "shield": false
 }
 
@@ -22,7 +23,8 @@ power_up = {
 position = Vector2(1329, -82)
 power_up = {
 "armo": false,
-"gas": true,
+"gas": false,
+"life": false,
 "shield": true
 }
 
@@ -30,8 +32,9 @@ power_up = {
 position = Vector2(-617, -235)
 power_up = {
 "armo": false,
-"gas": false,
-"shield": true
+"gas": true,
+"life": false,
+"shield": false
 }
 
 [node name="Player" parent="." instance=ExtResource("1_75my0")]
@@ -43,7 +46,7 @@ Player = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="enemies" type="Node" parent="."]
+[node name="enemies" type="Node2D" parent="."]
 
 [node name="enemy" parent="enemies" instance=ExtResource("3_1v350")]
 position = Vector2(601, 618)

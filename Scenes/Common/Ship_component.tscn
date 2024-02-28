@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://34o43kry1nf7"]
+[gd_scene load_steps=7 format=3 uid="uid://34o43kry1nf7"]
 
 [ext_resource type="Texture2D" uid="uid://dh6lbn45boggi" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire04.png" id="1_55f7l"]
 [ext_resource type="Texture2D" uid="uid://bwlegwameu257" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire05.png" id="1_a4cux"]
@@ -9,11 +9,13 @@ resource_name = "sprites_and_timers"
 script/source = "extends Node2D
 
 @export var Ship : CharacterBody2D
+@export var show_life_bar : bool = true
 @onready var shield_sprite = $shield
 @onready var shield_timer = $shield_timer
 @onready var turbo_take_timer = $turbo_take_timer
 @onready var shoot_cooldown = $shoot_cooldown
 @onready var turbo = $turbo
+@onready var progress_bar = $ProgressBar
 
 @export_category(\"Timers\")
 
@@ -30,18 +32,27 @@ var shields : Dictionary = {
 }
 
 
-func _process(delta):
-	if Ship.take_turbo_gas:
-		turbo.show()
-		turbo.play(\"turbo\")
-	else:
-		turbo.hide()
-
 func _ready():
+	turbo.hide()
 	shield_sprite.texture = null
 	shield_timer.wait_time = wait_times[\"shield\"]
 	turbo_take_timer.wait_time = wait_times[\"turbo\"]
 	shoot_cooldown.wait_time = wait_times[\"shoot\"]
+	progress_bar.max_value = Ship.max_life
+	if show_life_bar:
+		progress_bar.show()
+	else:
+		progress_bar.hide()
+	#progress_bar.value = Ship.current_life
+
+
+func _process(delta):
+	progress_bar.value = Ship.current_life
+	if Ship.take_turbo_gas:
+		turbo.show()
+		turbo.play(\"turbo\")
+		
+
 
 
 
@@ -58,6 +69,7 @@ func _on_turbo_take_timer_timeout():
 	print_debug(\"Turbo left \", Ship.turbo)
 	Ship.turbo -= 1
 	Ship.take_turbo_gas = false
+	turbo.hide()
 	
 
 
@@ -83,6 +95,9 @@ animations = [{
 "name": &"turbo",
 "speed": 5.0
 }]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q073h"]
+bg_color = Color(0.843137, 0.054902, 0, 1)
 
 [node name="ship_timers_&_sprites" type="Node2D"]
 script = SubResource("GDScript_ko8t8")
@@ -110,6 +125,16 @@ animation = &"turbo"
 autoplay = "turbo"
 frame = 2
 frame_progress = 1.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -27.0
+offset_right = 28.0
+offset_bottom = -22.0
+rotation = 1.56051
+theme_override_styles/fill = SubResource("StyleBoxFlat_q073h")
+step = 1.0
+show_percentage = false
 
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
 [connection signal="timeout" from="turbo_take_timer" to="." method="_on_turbo_take_timer_timeout"]

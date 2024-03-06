@@ -23,6 +23,7 @@ offset_left = -33.424
 offset_top = -20.024
 offset_right = 35.576
 offset_bottom = 19.976
+alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 anchors_preset = -1

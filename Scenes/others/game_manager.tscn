@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwgrios46vh38"]
+
+[ext_resource type="Script" path="res://Scenes/others/game_manager.gd" id="1_8it0l"]
+
+[node name="Game_Manager" type="Node"]
+script = ExtResource("1_8it0l")
+
+[node name="enemy_spawn_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="comet_spawner" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="comet_spawner" to="." method="_on_comet_spawner_timeout"]

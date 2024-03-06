@@ -1,7 +1,7 @@
 extends Control
 @onready var h_box_container = $CanvasLayer/HBoxContainer
-var max_distance := 600
-var in_show_dis := 300
+var max_distance := 820
+var in_show_dis := 420
 @export var Enemies : Node2D
 var heart_ship = preload("res://Scenes/UI/life_ship.tscn")
 @onready var progress_bar = $CanvasLayer/ProgressBar
@@ -29,6 +29,7 @@ func _process(delta):
 		#print_debug("So it is the ----------" , i)
 		if get_distnance(Player.global_position, _i.global_position) > max_distance:
 			All_enemies[i].global_position = teleport_distance(Player.global_position , _i.global_position)
+			All_enemies[i].look_at(Player.global_position)
 			All_enemies[i].show()
 		else:
 			All_enemies[i].hide()
@@ -48,6 +49,8 @@ func set_max_heart(_max : int):
 		
 	for i in range(_max):
 		var heart = heart_ship.instantiate()
+		
+		
 		h_box_container.add_child(heart)
 
 

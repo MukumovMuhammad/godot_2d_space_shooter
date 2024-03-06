@@ -4,8 +4,6 @@ extends Area2D
 
 
 func _on_body_entered(body):
-	if body.is_in_group("laser"):
-		Ship.take_demage(body.hit_demage)
 	if body.is_in_group("health"):
 		Ship.get_life(body.life_point)
 
@@ -25,6 +23,8 @@ func _on_area_entered(area):
 		area.self_destroy()
 	if area.is_in_group("laser"):
 		Ship.take_demage(area.hit_demage)
-	if area.is_in_group("shield"):
+	elif area.is_in_group("shield"):
 		Ship.trigger_shield(1)
+	elif area.is_in_group("comet"):
+		Ship.take_demage(area.comet_demage)
 		#print("Shield was triggered")

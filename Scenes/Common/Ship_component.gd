@@ -88,19 +88,6 @@ func demage_anim() -> void:
 		anim_sprites.show()
 		anim_sprites.play("3rd_demage")
 		
-func demage_animation() -> void:
-	var _life = protsent(max_life, current_life)
-	if _life > 80:
-		anim_sprites.hide()
-	elif _life < 80 and _life > 50:
-		anim_sprites.show()
-		anim_sprites.play("1st_demage")
-	elif _life < 50 and _life > 20:
-		anim_sprites.show()
-		anim_sprites.play("2nd_demage")
-	elif _life < 20 and _life > 5:
-		anim_sprites.show()
-		anim_sprites.play("3rd_demage")
 
 
 func Death():
@@ -109,11 +96,15 @@ func Death():
 	
 	get_parent().add_child(parts)
 	self.queue_free()
+
+
 func get_life(points : int):
 	current_life += points
 	if current_life > max_life:
 		current_life = max_life
-	demage_animation()
+	
+	lifes_left.emit(current_life)
+	demage_anim()
 
 
 func trigger_shield(type : int):

@@ -6,8 +6,13 @@ var comet_demage = 2
 var movement_vector : Vector2 = Vector2(0,-1)
 var hitted : bool = false
 var the_comet : bool = false
-
-
+@onready var audio = $AudioStreamPlayer2D
+func _ready():
+	#preload("res://essets/kenney_space-shooter-redux/Bonus/sfx_laser1.ogg")
+	if audio:
+		audio.play()
+	
+ 
 func _physics_process(delta):
 	if !hitted:
 		if the_comet:

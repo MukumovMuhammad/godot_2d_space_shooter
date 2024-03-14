@@ -118,6 +118,8 @@ func fill_turbo(points : int):
 	turbo += points
 	if turbo > max_turbo:
 		turbo = max_turbo
+	
+	turbo_left.emit(turbo)
 
 
 func shoot(muzzle):

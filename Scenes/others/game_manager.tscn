@@ -6,7 +6,7 @@
 script = ExtResource("1_8it0l")
 
 [node name="enemy_spawn_timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 4.0
 one_shot = true
 
 [node name="comet_spawner" type="Timer" parent="."]

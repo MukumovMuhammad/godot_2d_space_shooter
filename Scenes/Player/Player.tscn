@@ -13,7 +13,7 @@ script/source = "extends ship
 
 
 func _ready():
-	max_life = 10
+	max_life = 2
 	print_debug(\"The child's ready\")
 	timers = $Timers
 	class_ready()
@@ -22,10 +22,10 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed(\"space\"):
 		shoot(muzzle)
-	if Input.is_action_just_pressed(\"mouse_left\") and can_shoot:
-		print_debug(\"The rotation of player is \" , self.rotation)
-		look_at(get_global_mouse_position())
-		shoot(muzzle)
+	#if Input.is_action_just_pressed(\"mouse_left\") and can_shoot:
+	#	print_debug(\"The rotation of player is \" , self.rotation)
+	#	look_at(get_global_mouse_position())
+	#	shoot(muzzle)
 	
 	if Input.is_action_just_pressed(\"right_mouse\"):
 		var _dis = abs(global_position - get_global_mouse_position())

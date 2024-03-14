@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Space Shooter"
-run/main_scene="res://Scenes/levels/Test_World.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://essets/kenney_space-shooter-redux/PNG/playerShip3_blue.png"
 

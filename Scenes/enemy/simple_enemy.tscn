@@ -1,27 +1,35 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnhgrpobwmvs8"]
+[gd_scene load_steps=11 format=3 uid="uid://cnhgrpobwmvs8"]
 
-[ext_resource type="Texture2D" uid="uid://d1i1mq8steeg2" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlack1.png" id="1_6a8a2"]
 [ext_resource type="Texture2D" uid="uid://u00ciwxwdgq7" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyGreen2.png" id="1_bn5dd"]
 [ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="2_djjfl"]
+[ext_resource type="Texture2D" uid="uid://deuhipwyfo2s8" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlue2.png" id="2_jgeeg"]
+[ext_resource type="Texture2D" uid="uid://dj1c2oh2rla22" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlack2.png" id="3_ic4x1"]
 [ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="3_lduok"]
+[ext_resource type="Texture2D" uid="uid://ycuwb0rvfd0n" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyRed2.png" id="3_rn1pe"]
 
 [sub_resource type="GDScript" id="GDScript_7jqws"]
 script/source = "extends ship
 @onready var muzzle = $muzzle
+@onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var idle_timer = $idle_timer
 
 var player_see : bool = false
 var Player : CharacterBody2D
 @export var max_distance : float = 600.0
 @export var min_distance : float = 200.0
 var too_min_distance : float = 100.0
-
+var go_to : int = 1
 func _ready():
+	var _i = randi_range(1,4)
+	animated_sprite_2d.play(str(_i))
 	timers = $\"ship_timers_&_sprites\"
 	class_ready()
 
 
 func _physics_process(delta):
 	if player_see and Player:
+		if !idle_timer.is_stopped():
+			idle_timer.stop()
 		look_at(Player.position)
 		var dis = get_distnance(global_position, Player.global_position)
 		#print_debug(\"The anemy and player distance is \", dis)
@@ -42,8 +50,25 @@ func _physics_process(delta):
 			#print_debug(\"The enemy shoot\")
 			shoot(muzzle)
 	else:
-		move_to_forward(0)
-	
+		if idle_timer.is_stopped():
+			idle_timer.start()
+		match go_to:
+			1:
+				move_to_forward(1)
+			2:
+				move_to_forward(1)
+				ship_rotate(1)
+			3:
+				#move_to_sides(1)
+				ship_rotate(1)
+				move_to_sides(1)
+			4:
+				move_to_forward(1)
+				move_to_sides(-1)
+			5:
+				move_to_forward(-1)
+			_:
+				move_to_forward(0)
 	move_and_slide()
 
 
@@ -66,6 +91,10 @@ func _on_detecting_area_body_exited(body):
 func get_distnance(pos1 : Vector2, pos2 : Vector2):
 	var _dis = sqrt(pow(pos2.x - pos1.x,2) + pow(pos2.y - pos1.y,2))
 	return _dis
+
+
+func _on_idle_timer_timeout():
+	go_to = randi_range(1,5)
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ogyqm"]
@@ -73,12 +102,33 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_bn5dd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("1_6a8a2")
 }],
 "loop": true,
-"name": &"simple",
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jgeeg")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rn1pe")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ic4x1")
+}],
+"loop": true,
+"name": &"4",
 "speed": 5.0
 }]
 
@@ -97,7 +147,7 @@ speed = 100.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_ogyqm")
-animation = &"simple"
+animation = &"1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -129,5 +179,10 @@ shape = SubResource("CircleShape2D_h6rp6")
 [node name="muzzle" type="Node2D" parent="."]
 position = Vector2(50, 0)
 
+[node name="idle_timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="body_entered" from="Detecting_area" to="." method="_on_detecting_area_body_entered"]
 [connection signal="body_exited" from="Detecting_area" to="." method="_on_detecting_area_body_exited"]
+[connection signal="timeout" from="idle_timer" to="." method="_on_idle_timer_timeout"]

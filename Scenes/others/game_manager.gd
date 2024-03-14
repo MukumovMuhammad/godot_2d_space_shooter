@@ -2,14 +2,37 @@ extends Node
 @onready var comet_spawner = $comet_spawner
 
 @onready var enemy_spawn_timer = $enemy_spawn_timer
-#preload("res://Scenes/enemy/simple_enemy.tscn")
+
+
+
+@export_category("Nodes")
 @export var enemies : Node2D
 @export var meteords : Node2D
+@export_category("UI and Player")
 @export var Player : ship
+@export var pause : Control
+@export var camera : Camera2D
 
+var data := load("res://data/data.tres")
+var can_spawn : bool = true
+var camera_pos : Vector2
 func _ready():
-	enemy_spawn_timer.start()
+	print_debug("the data ======" , data.mode)
+	if data.mode == 0:
+		enemy_spawn_timer.start()
 	comet_spawner.start()
+		
+
+
+func _process(delta):
+	if Player == null:
+		can_spawn = false
+		var cam : Camera2D = Camera2D.new()
+		cam.global_position = camera_pos
+		get_parent().add_child(cam)
+		pause.player_dead()
+	else:
+		camera_pos = camera.global_position
 
 func spawn_simple_enemy():
 	var _enemy := preload("res://Scenes/enemy/simple_enemy.tscn").instantiate()
@@ -54,9 +77,12 @@ func comet_spawn():
 	comet_spawner.start()
 
 func _on_enemy_spawn_timer_timeout():
-	spawn_simple_enemy()
+	if can_spawn:
+		spawn_simple_enemy()
+
 
 
 
 func _on_comet_spawner_timeout():
-	comet_spawn()
+	if can_spawn:
+		comet_spawn()

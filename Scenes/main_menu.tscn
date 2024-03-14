@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgfljaa07mhnf"]
+
+[ext_resource type="PackedScene" uid="uid://cbruw83qw7lhy" path="res://Scenes/levels/BG.tscn" id="1_tld8e"]
+[ext_resource type="FontFile" uid="uid://cc87gpb5dumy3" path="res://essets/kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="2_nimfs"]
+[ext_resource type="Texture2D" uid="uid://by2ngf5wojjk7" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonBlue.png" id="2_ucl0g"]
+[ext_resource type="Texture2D" uid="uid://d3lc0i5chrdwt" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonYellow.png" id="4_cwqhp"]
+[ext_resource type="Texture2D" uid="uid://csn7bjxdj600u" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonRed.png" id="4_oy6x5"]
+
+[sub_resource type="GDScript" id="GDScript_awuis"]
+resource_name = "main_menu"
+script/source = "extends Control
+
+var data = load(\"res://data/data.tres\")
+
+func _on_survival_lvl_btn_pressed():
+	data.mode = 0
+	await ResourceSaver.save(data, \"res://data/data.tres\")
+	print_debug(\"the data ======\" , data.mode)
+	get_tree().change_scene_to_file(\"res://Scenes/levels/simple_survival.tscn\")
+
+
+func _on_double_survival_btn_pressed():
+	data.mode = 1
+	await ResourceSaver.save(data, \"res://data/data.tres\")
+	print_debug(\"the data ======\" , data.mode)
+	get_tree().change_scene_to_file(\"res://Scenes/levels/simple_survival.tscn\")
+
+func _on_exit_pressed():
+	get_tree().quit()
+"
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_awuis")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_tld8e")]
+
+[node name="survival_lvl_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.373
+anchor_top = 0.156
+anchor_right = 0.65
+anchor_bottom = 0.255
+offset_left = -0.544067
+offset_top = 0.367996
+offset_right = 0.799927
+offset_bottom = 0.139969
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.662745, 0.164706, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 50
+text = "survival"
+icon = ExtResource("2_ucl0g")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="double_survival_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.39
+anchor_right = 0.653
+anchor_bottom = 0.489
+offset_left = -6.10352e-05
+offset_top = -0.0800171
+offset_right = -0.384155
+offset_bottom = -0.308014
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.662745, 0.164706, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 40
+text = "double survival"
+icon = ExtResource("4_cwqhp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.646
+anchor_right = 0.653
+anchor_bottom = 0.745
+offset_left = -6.10352e-05
+offset_top = 0.0879517
+offset_right = -0.384155
+offset_bottom = -0.140076
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.662745, 0.164706, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 50
+text = "exit"
+icon = ExtResource("4_oy6x5")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="survival_lvl_btn" to="." method="_on_survival_lvl_btn_pressed"]
+[connection signal="pressed" from="double_survival_btn" to="." method="_on_double_survival_btn_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

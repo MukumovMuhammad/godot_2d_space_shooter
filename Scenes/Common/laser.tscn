@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cu3yg4v2caxsx"]
+[gd_scene load_steps=10 format=3 uid="uid://cu3yg4v2caxsx"]
 
 [ext_resource type="Texture2D" uid="uid://dl8g6w5oes6l2" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserBlue01.png" id="1_dklbl"]
 [ext_resource type="Script" path="res://Scenes/Common/laser.gd" id="1_kvo2s"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c183puahqeiu2" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserRed01.png" id="3_s8rev"]
 [ext_resource type="Texture2D" uid="uid://bqqs5sjvsspg1" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserBlue09.png" id="3_tf001"]
 [ext_resource type="Texture2D" uid="uid://qygvubha5h8g" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserBlue08.png" id="5_8dpiv"]
+[ext_resource type="AudioStream" uid="uid://bugvrrjadm0mc" path="res://essets/kenney_space-shooter-redux/Bonus/sfx_laser1.ogg" id="7_73ga4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aie54"]
 animations = [{
@@ -68,6 +69,9 @@ shape = SubResource("CapsuleShape2D_elkij")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-0.5, -16.5)
 scale = Vector2(0.15, 1.25)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_73ga4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="lasers_sprite" to="." method="_on_lasers_sprite_animation_finished"]

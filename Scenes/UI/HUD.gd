@@ -9,6 +9,7 @@ var enemy = preload("res://Scenes/UI/enemy_icon.tscn")
 @export var Player : CharacterBody2D
 var All_enemies : Array
 func _ready():
+	"""
 	#set_max_heart(3)
 	for i in Enemies.get_children():
 		var en = enemy.instantiate()
@@ -18,11 +19,12 @@ func _ready():
 	
 	for i in All_enemies:
 		i.hide()
+"""
 
 
+"""
 func _process(delta):
 	var i = 0
-	
 	for _i in Enemies.get_children():
 		if !_i:
 			All_enemies[i].hide()
@@ -41,6 +43,7 @@ func _process(delta):
 	i = 0
 
 
+"""
 func set_max_heart(_max : int):
 	print_debug("setting max heart")
 	var hearts = h_box_container.get_children()

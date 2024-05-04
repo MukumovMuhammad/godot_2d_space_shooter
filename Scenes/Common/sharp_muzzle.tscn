@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://6dqj4e13qp7o"]
+
+[ext_resource type="Texture2D" uid="uid://xr5u13rqnncu" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserRed14.png" id="1_s3yo7"]
+[ext_resource type="Texture2D" uid="uid://3hoowv2oidt4" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserRed05.png" id="2_fxf5r"]
+
+[sub_resource type="GDScript" id="GDScript_mqqvg"]
+resource_name = "sharp_muzzle"
+script/source = "extends Area2D
+signal bounce_back
+
+@export var hydra_kill : bool = false
+var dont_kill
+var do_damage : bool = false
+var kill_body
+@export var damage_point : int = 1
+@onready var speed_killing = $speed_killing
+@export var shoot_time : int = 2
+
+func _ready():
+	speed_killing.wait_time = shoot_time
+
+
+
+func _on_body_entered(body):
+	if body.is_in_group(\"hydra\") and !hydra_kill:
+		return
+	if  body.is_in_group(\"ship\"):
+		do_damage = true
+		kill_body = body
+		Give_demage_to_ship(body)
+
+
+
+func _on_body_exited(body):
+	if body.name != dont_kill and body.is_in_group(\"ship\"):
+		do_damage = false
+
+func Give_demage_to_ship(the_ship):
+	the_ship.take_demage(damage_point, false)
+	speed_killing.start()
+	bounce_back.emit()
+
+
+func _on_speed_killing_timeout():
+	if do_damage:
+		Give_demage_to_ship(kill_body)
+		
+
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87p2m"]
+size = Vector2(112, 81)
+
+[node name="muzzle" type="Area2D"]
+collision_mask = 7
+script = SubResource("GDScript_mqqvg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 10)
+shape = SubResource("RectangleShape2D_87p2m")
+
+[node name="LaserRed14" type="Sprite2D" parent="."]
+position = Vector2(-20, 0)
+rotation = -0.174533
+texture = ExtResource("1_s3yo7")
+
+[node name="LaserRed15" type="Sprite2D" parent="."]
+position = Vector2(20, 0)
+rotation = 0.174533
+texture = ExtResource("1_s3yo7")
+
+[node name="LaserRed05" type="Sprite2D" parent="."]
+position = Vector2(-40, 35)
+rotation = -0.610865
+texture = ExtResource("2_fxf5r")
+
+[node name="LaserRed08" type="Sprite2D" parent="."]
+position = Vector2(-45, 0)
+rotation = -0.610865
+texture = ExtResource("2_fxf5r")
+
+[node name="LaserRed06" type="Sprite2D" parent="."]
+position = Vector2(40, 35)
+rotation = 0.610865
+texture = ExtResource("2_fxf5r")
+
+[node name="LaserRed07" type="Sprite2D" parent="."]
+position = Vector2(45, 0)
+rotation = 0.610865
+texture = ExtResource("2_fxf5r")
+
+[node name="speed_killing" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="speed_killing" to="." method="_on_speed_killing_timeout"]

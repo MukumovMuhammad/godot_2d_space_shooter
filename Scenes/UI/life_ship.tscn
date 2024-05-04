@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj72cfe3wrej4"]
+
+[ext_resource type="Texture2D" uid="uid://cbm0aerhn1jbv" path="res://essets/kenney_space-shooter-redux/PNG/playerShip1_blue.png" id="1_ytyf3"]
+
+[node name="ships" type="Panel"]
+layout_direction = 1
+anchors_preset = -1
+anchor_left = -0.013
+anchor_top = -0.017
+anchor_right = 0.014
+anchor_bottom = 0.02
+offset_left = -4.536
+offset_top = -3.476
+offset_right = 3.808
+offset_bottom = 3.56
+
+[node name="PlayerShip1Blue" type="Sprite2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(27, 21)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ytyf3")

@@ -1,0 +1,114 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7a2xqf77kagk"]
+
+[ext_resource type="Script" path="res://Scenes/enemy/mini_boss.gd" id="1_4urv4"]
+[ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="2_b76q0"]
+[ext_resource type="Texture2D" uid="uid://d1i1mq8steeg2" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlack1.png" id="2_dfyt3"]
+[ext_resource type="Texture2D" uid="uid://c2sr52iyyy2qk" path="res://essets/kenney_space-shooter-redux/PNG/Effects/star1.png" id="3_870c3"]
+[ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="3_sr3wv"]
+[ext_resource type="Texture2D" uid="uid://cth4tn020h4q0" path="res://essets/kenney_space-shooter-redux/PNG/Effects/star2.png" id="4_auffa"]
+[ext_resource type="Texture2D" uid="uid://d0hxpgbraor5o" path="res://essets/kenney_space-shooter-redux/PNG/Effects/star3.png" id="5_d7i18"]
+[ext_resource type="PackedScene" uid="uid://c7dmfvpyg2wvu" path="res://Scenes/Common/shooter_muzzle.tscn" id="8_jiyqa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_quvwj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dfyt3")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_870c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_auffa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_d7i18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_auffa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_870c3")
+}],
+"loop": false,
+"name": &"appearing",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d7i18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_auffa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_870c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_auffa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_d7i18")
+}],
+"loop": false,
+"name": &"disappearing",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6v4lx"]
+radius = 41.1461
+
+[node name="mini_boss" type="CharacterBody2D" node_paths=PackedStringArray("components", "Shooter_Muzzle") groups=["mini_boss", "ship"]]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("1_4urv4")
+components = NodePath("ship_components")
+Shooter_Muzzle = NodePath("shooter_muzzle")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_quvwj")
+animation = &"1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 2)
+shape = SubResource("CircleShape2D_6v4lx")
+
+[node name="ship_components" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_sr3wv")]
+Ship = NodePath("..")
+wait_times = {
+"shield": 5,
+"shoot": 2.0,
+"turbo": 0.1
+}
+
+[node name="hit_area" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("2_b76q0")]
+position = Vector2(-5, 0)
+scale = Vector2(1.47, 1.64)
+collision_layer = 2
+collision_mask = 6
+Ship = NodePath("..")
+
+[node name="teleport_timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="apearing_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="shooter_muzzle" parent="." instance=ExtResource("8_jiyqa")]
+position = Vector2(45, -20)
+
+[node name="shooter_muzzle2" parent="." instance=ExtResource("8_jiyqa")]
+position = Vector2(45, 20)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="teleport_timer" to="." method="_on_teleport_timer_timeout"]
+[connection signal="timeout" from="apearing_timer" to="." method="_on_apearing_timer_timeout"]

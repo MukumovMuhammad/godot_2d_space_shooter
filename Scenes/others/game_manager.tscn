@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://gepktsdfus7f"]
+
+[ext_resource type="Script" path="res://Scenes/others/game_manager.gd" id="1_8it0l"]
+
+[node name="Game_Manager" type="Node"]
+process_mode = 3
+script = ExtResource("1_8it0l")
+
+[node name="game_timer" type="Timer" parent="."]
+one_shot = true

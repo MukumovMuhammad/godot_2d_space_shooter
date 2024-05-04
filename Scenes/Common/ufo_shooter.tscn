@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4f2icgsyd4ni"]
+
+[ext_resource type="Texture2D" uid="uid://ct2ipaivcx4f3" path="res://essets/kenney_space-shooter-redux/PNG/ufoBlue.png" id="1_6p6ag"]
+[ext_resource type="Script" path="res://Scenes/Common/ufo_shooter.gd" id="1_w0a3d"]
+[ext_resource type="PackedScene" uid="uid://dfgy2eh8mdr4w" path="res://Scenes/Common/auto_laser_hooter.tscn" id="2_et2yc"]
+
+[node name="ufo_shooter" type="Marker2D"]
+top_level = true
+script = ExtResource("1_w0a3d")
+
+[node name="auto_laser_shooter" parent="." instance=ExtResource("2_et2yc")]
+position = Vector2(231, 0)
+
+[node name="UfoBlue" type="Sprite2D" parent="."]
+position = Vector2(227, 0)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_6p6ag")

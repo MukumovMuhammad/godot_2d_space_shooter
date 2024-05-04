@@ -1,0 +1,4 @@
+res://Scenes/UI/HUD.tscn
+res://Scenes/Common/Ship_component.gd
+res://Scenes/enemy/mini_boss.gd
+res://Scenes/Player/Player.tscn

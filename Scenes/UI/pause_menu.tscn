@@ -1,0 +1,177 @@
+[gd_scene load_steps=4 format=3 uid="uid://de7mirmrxsfwh"]
+
+[ext_resource type="Texture2D" uid="uid://by2ngf5wojjk7" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonBlue.png" id="1_8in7c"]
+[ext_resource type="FontFile" uid="uid://cc87gpb5dumy3" path="res://essets/kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="1_xkkkw"]
+
+[sub_resource type="GDScript" id="GDScript_tbih0"]
+script/source = "extends Control
+@onready var pause_btn = $CanvasLayer/pause_btn
+@onready var pause_panel = $CanvasLayer/pause_panel
+@onready var continue_btn = $CanvasLayer/pause_panel/Continue_btn
+@onready var paused : bool = false
+@onready var score = $CanvasLayer/Node2D/score
+func _ready():
+	pause_btn.show()
+	pause_panel.hide()
+	score.hide()
+
+
+
+func _on_pause_btn_pressed():
+	paused = true
+	get_tree().paused = paused
+	pause_btn.hide()
+	pause_panel.show()
+
+
+func _on_continue_btn_pressed():
+	paused = false
+	get_tree().paused = paused
+	pause_btn.show()
+	pause_panel.hide()
+
+
+func _on_restart_btn_pressed():
+	paused = false
+	get_tree().paused = paused
+	get_tree().reload_current_scene()
+
+
+func _on_to_menu_btn_pressed():
+	
+	paused = false
+	get_tree().paused = paused
+	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
+
+func player_dead():
+	pause_btn.hide()
+	pause_panel.show()
+	continue_btn.hide()
+	
+
+
+func show_score(text : String):
+	score.text = text
+	score.show()
+
+"
+
+[node name="pause_menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_tbih0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="pause_btn" type="Button" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xkkkw")
+theme_override_font_sizes/font_size = 25
+text = "PAUSE"
+icon = ExtResource("1_8in7c")
+icon_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="pause_panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Continue_btn" type="Button" parent="CanvasLayer/pause_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.495
+anchor_top = 0.166
+anchor_right = 0.495
+anchor_bottom = 0.166
+offset_left = -225.36
+offset_top = -44.352
+offset_right = 225.64
+offset_bottom = 44.648
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.458824, 0.6, 0.807843, 1)
+theme_override_fonts/font = ExtResource("1_xkkkw")
+theme_override_font_sizes/font_size = 30
+text = "Continue
+"
+icon = ExtResource("1_8in7c")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Restart_btn" type="Button" parent="CanvasLayer/pause_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.499
+anchor_top = 0.466
+anchor_right = 0.499
+anchor_bottom = 0.466
+offset_left = -235.272
+offset_top = -62.952
+offset_right = 233.728
+offset_bottom = 63.048
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.458824, 0.6, 0.807843, 1)
+theme_override_fonts/font = ExtResource("1_xkkkw")
+theme_override_font_sizes/font_size = 30
+text = "Restart level"
+icon = ExtResource("1_8in7c")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="to_menu_btn" type="Button" parent="CanvasLayer/pause_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.495
+anchor_top = 0.75
+anchor_right = 0.495
+anchor_bottom = 0.75
+offset_left = -235.36
+offset_top = -63.0001
+offset_right = 233.64
+offset_bottom = 62.9999
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.458824, 0.6, 0.807843, 1)
+theme_override_fonts/font = ExtResource("1_xkkkw")
+theme_override_font_sizes/font_size = 30
+text = "Exit to menu"
+icon = ExtResource("1_8in7c")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Node2D" type="Node" parent="CanvasLayer"]
+
+[node name="score" type="Label" parent="CanvasLayer/Node2D"]
+offset_left = 682.0
+offset_top = 94.0
+offset_right = 1009.0
+offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("1_xkkkw")
+theme_override_font_sizes/font_size = 30
+
+[connection signal="pressed" from="CanvasLayer/pause_btn" to="." method="_on_pause_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/pause_panel/Continue_btn" to="." method="_on_continue_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/pause_panel/Restart_btn" to="." method="_on_restart_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/pause_panel/to_menu_btn" to="." method="_on_to_menu_btn_pressed"]

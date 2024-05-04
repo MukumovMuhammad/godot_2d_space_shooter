@@ -1,0 +1,210 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgfljaa07mhnf"]
+
+[ext_resource type="PackedScene" uid="uid://cbruw83qw7lhy" path="res://Scenes/levels/BG.tscn" id="1_tld8e"]
+[ext_resource type="FontFile" uid="uid://cc87gpb5dumy3" path="res://essets/kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="2_nimfs"]
+[ext_resource type="Texture2D" uid="uid://by2ngf5wojjk7" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonBlue.png" id="2_ucl0g"]
+[ext_resource type="Texture2D" uid="uid://d3lc0i5chrdwt" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonYellow.png" id="4_cwqhp"]
+[ext_resource type="Texture2D" uid="uid://csn7bjxdj600u" path="res://essets/kenney_space-shooter-redux/PNG/UI/buttonRed.png" id="4_oy6x5"]
+[ext_resource type="FontFile" uid="uid://c273naw07d1b8" path="res://essets/kenney_space-shooter-redux/Bonus/kenvector_future_thin.ttf" id="6_ljgg5"]
+
+[sub_resource type="GDScript" id="GDScript_awuis"]
+resource_name = "main_menu"
+script/source = "extends Control
+
+var data = load(\"res://data/data.tres\")
+
+func _on_survival_lvl_btn_pressed():
+	data.mode = 0
+	await ResourceSaver.save(data, \"res://data/data.tres\")
+	print_debug(\"the data ======\" , data.mode)
+	get_tree().change_scene_to_file(\"res://Scenes/levels/simple_survival.tscn\")
+
+
+func _on_double_survival_btn_pressed():
+	data.mode = 1
+	await ResourceSaver.save(data, \"res://data/data.tres\")
+	print_debug(\"the data ======\" , data.mode)
+	get_tree().change_scene_to_file(\"res://Scenes/levels/simple_survival.tscn\")
+
+func _on_exit_pressed():
+	get_tree().quit()
+"
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_awuis")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_tld8e")]
+offset = Vector2(100, 0)
+transform = Transform2D(1, 0, 0, 1, 100, 0)
+
+[node name="survival_lvl_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.042
+anchor_right = 0.304
+anchor_bottom = 0.141
+offset_left = -0.656002
+offset_top = 0.175999
+offset_right = 0.687927
+offset_bottom = -0.0520325
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.662745, 0.164706, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 50
+text = "survival"
+icon = ExtResource("2_ucl0g")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="double_survival_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.032
+anchor_top = 0.338
+anchor_right = 0.31
+anchor_bottom = 0.437
+offset_left = -0.296001
+offset_top = 0.463959
+offset_right = -0.679993
+offset_bottom = 0.235992
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.662745, 0.164706, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 40
+text = "double survival"
+icon = ExtResource("4_cwqhp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.665
+anchor_right = 0.303
+anchor_bottom = 0.759
+offset_left = -0.472
+offset_top = -0.379944
+offset_right = -0.583984
+offset_bottom = 0.252014
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.662745, 0.164706, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 50
+text = "exit"
+icon = ExtResource("4_oy6x5")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="score_kill" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 473.0
+offset_right = 645.0
+offset_bottom = 549.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 30
+text = "ship get upgrade by
+destroying anemy"
+
+[node name="score_timer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 153.0
+offset_right = 566.0
+offset_bottom = 213.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_nimfs")
+theme_override_font_sizes/font_size = 30
+text = "ship get upgrade by time"
+
+[node name="How to play" type="Label" parent="."]
+layout_mode = 0
+offset_left = 801.0
+offset_top = 24.0
+offset_right = 1583.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_ljgg5")
+theme_override_font_sizes/font_size = 50
+text = "How to play this Game:"
+
+[node name="controls" type="Label" parent="."]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 117.0
+offset_right = 1773.0
+offset_bottom = 322.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_ljgg5")
+theme_override_font_sizes/font_size = 50
+text = "WASD - to move
+Shift - to use turbo
+Space - to shoot"
+
+[node name="How game works" type="Label" parent="."]
+layout_mode = 0
+offset_left = 781.0
+offset_top = 238.0
+offset_right = 1666.0
+offset_bottom = 868.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_ljgg5")
+theme_override_font_sizes/font_size = 50
+text = "
+
+depending on the level
+your ship will get upgrades
+
+Every upgrade will make
+your ship :
++shoot faster
++shield last longer
++turbo consumption decrease"
+
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 892.0
+offset_right = 620.0
+offset_bottom = 949.0
+tooltip_text = "See a sourse code of this game"
+theme_override_fonts/font = ExtResource("6_ljgg5")
+theme_override_font_sizes/font_size = 50
+text = "Github"
+underline = 1
+uri = "https://github.com/MukumovMuhammad/godot_2d_space_shooter/"
+
+[node name="LinkButton2" type="LinkButton" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 890.0
+offset_right = 329.0
+offset_bottom = 947.0
+tooltip_text = "Contact to Creater or just leave any feedback"
+theme_override_fonts/font = ExtResource("6_ljgg5")
+theme_override_font_sizes/font_size = 50
+text = "feedback"
+underline = 1
+uri = "muhammad.bw.03@gmail.com"
+
+[connection signal="pressed" from="survival_lvl_btn" to="." method="_on_survival_lvl_btn_pressed"]
+[connection signal="pressed" from="double_survival_btn" to="." method="_on_double_survival_btn_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

@@ -1,0 +1,155 @@
+[gd_scene load_steps=7 format=3 uid="uid://34o43kry1nf7"]
+
+[ext_resource type="Texture2D" uid="uid://dh6lbn45boggi" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire04.png" id="1_55f7l"]
+[ext_resource type="Texture2D" uid="uid://bwlegwameu257" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire05.png" id="1_a4cux"]
+[ext_resource type="Texture2D" uid="uid://c6mh1xpsqy15o" path="res://essets/kenney_space-shooter-redux/PNG/Effects/fire01.png" id="1_aocgb"]
+
+[sub_resource type="GDScript" id="GDScript_ko8t8"]
+resource_name = "sprites_and_timers"
+script/source = "extends Node2D
+
+@export var Ship : CharacterBody2D
+@export var show_life_bar : bool = true
+@onready var shield_sprite = $shield
+@onready var shield_timer = $shield_timer
+@onready var turbo_take_timer = $turbo_take_timer
+@onready var shoot_cooldown = $shoot_cooldown
+@onready var turbo = $turbo
+@onready var progress_bar = $ProgressBar
+
+@export_category(\"Timers\")
+
+@export var wait_times : Dictionary = {
+	\"shield\" : 5,
+	\"turbo\" : 0.1,
+	\"shoot\" : 0.5
+}
+
+var shields : Dictionary = {
+	1 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield1.png\"),
+	2 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield2.png\"),
+	3 : preload(\"res://essets/kenney_space-shooter-redux/PNG/Effects/shield3.png\")
+}
+
+
+
+
+func get_ready():
+	turbo.hide()
+	shield_sprite.texture = null
+	shield_timer.wait_time = wait_times[\"shield\"]
+	turbo_take_timer.wait_time = wait_times[\"turbo\"]
+	shoot_cooldown.wait_time = wait_times[\"shoot\"]
+	progress_bar.max_value = Ship.max_life
+	if show_life_bar:
+		progress_bar.show()
+	else:
+		progress_bar.hide()
+	#progress_bar.value = Ship.current_life
+
+
+func _process(delta):
+	if show_life_bar:
+		progress_bar.show()
+	else:
+		progress_bar.hide()
+	progress_bar.value = Ship.current_life
+	if Ship.take_turbo_gas:
+		turbo.show()
+		turbo.play(\"turbo\")
+	if Ship.have_shield:
+		Ship.shield_time_left.emit(shield_timer.wait_time, shield_timer.time_left)
+		
+
+
+
+func _on_shield_timer_timeout():
+	Ship.have_shield = false
+	shield_sprite.texture = null
+
+
+func _on_shoot_cooldown_timeout():
+	Ship.can_shoot = true
+	shoot_cooldown.wait_time = wait_times[\"shoot\"]
+
+
+func _on_turbo_take_timer_timeout():
+	print_debug(\"Turbo left \", Ship.turbo)
+	Ship.turbo -= 1
+	Ship.take_turbo_gas = false
+	turbo.hide()
+	
+
+
+func give_shield(type : int):
+	print_debug(\"Shield is recieved \", type)
+	shield_sprite.texture = shields[type]
+
+func update_timers(new_wait_times):
+	shield_timer.wait_time = new_wait_times[\"shield\"]
+	turbo_take_timer.wait_time = new_wait_times[\"turbo\"]
+	shoot_cooldown.wait_time = new_wait_times[\"shoot\"]
+
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rip5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a4cux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_55f7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_aocgb")
+}],
+"loop": false,
+"name": &"turbo",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q073h"]
+bg_color = Color(0.843137, 0.054902, 0, 1)
+
+[node name="ship_components" type="Node2D"]
+script = SubResource("GDScript_ko8t8")
+
+[node name="shield_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="shield" type="Sprite2D" parent="."]
+rotation = 1.5708
+
+[node name="turbo_take_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="shoot_cooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="turbo" type="AnimatedSprite2D" parent="."]
+position = Vector2(-57.7329, -9.89311e-06)
+rotation = 1.5708
+scale = Vector2(1, 1.17632)
+sprite_frames = SubResource("SpriteFrames_rip5h")
+animation = &"turbo"
+autoplay = "turbo"
+frame = 2
+frame_progress = 1.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -30.0
+offset_right = 36.0
+offset_bottom = -26.0
+rotation = 1.56051
+theme_override_styles/fill = SubResource("StyleBoxFlat_q073h")
+step = 1.0
+show_percentage = false
+
+[connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="turbo_take_timer" to="." method="_on_turbo_take_timer_timeout"]
+[connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]

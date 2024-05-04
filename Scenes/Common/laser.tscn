@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://cu3yg4v2caxsx"]
+
+[ext_resource type="Texture2D" uid="uid://dl8g6w5oes6l2" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserBlue01.png" id="1_dklbl"]
+[ext_resource type="Script" path="res://Scenes/Common/laser.gd" id="1_kvo2s"]
+[ext_resource type="Texture2D" uid="uid://dridfd7l2uyym" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserGreen03.png" id="2_vshcw"]
+[ext_resource type="Texture2D" uid="uid://c183puahqeiu2" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserRed01.png" id="3_s8rev"]
+[ext_resource type="Texture2D" uid="uid://bqqs5sjvsspg1" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserBlue09.png" id="3_tf001"]
+[ext_resource type="Texture2D" uid="uid://qygvubha5h8g" path="res://essets/kenney_space-shooter-redux/PNG/Lasers/laserBlue08.png" id="5_8dpiv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aie54"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dklbl")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8dpiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tf001")
+}],
+"loop": false,
+"name": &"blue_destroy",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vshcw")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_s8rev")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elkij"]
+radius = 2.3
+height = 31.6
+
+[node name="Laser" type="Area2D" groups=["laser"]]
+top_level = true
+collision_layer = 2
+collision_mask = 14
+script = ExtResource("1_kvo2s")
+
+[node name="lasers_sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.3, -15.8)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_aie54")
+animation = &"red"
+autoplay = "blue"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.3, -15.8)
+shape = SubResource("CapsuleShape2D_elkij")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, -16.5)
+scale = Vector2(0.15, 1.25)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="lasers_sprite" to="." method="_on_lasers_sprite_animation_finished"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

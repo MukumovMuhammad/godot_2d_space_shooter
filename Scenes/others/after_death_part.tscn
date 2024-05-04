@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://cacp4wye0wf2y"]
+
+[ext_resource type="Texture2D" uid="uid://xl3fgddsq4dt" path="res://essets/kenney_space-shooter-redux/PNG/Damage/playerShip1_damage3.png" id="1_026kq"]
+[ext_resource type="Texture2D" uid="uid://bl4w3sa5xt8i3" path="res://essets/kenney_space-shooter-redux/PNG/Damage/playerShip2_damage3.png" id="2_rpwqj"]
+[ext_resource type="Texture2D" uid="uid://cbmpeq610i5py" path="res://essets/kenney_space-shooter-redux/PNG/Damage/playerShip3_damage3.png" id="3_wlokh"]
+
+[sub_resource type="GDScript" id="GDScript_i4vg2"]
+script/source = "extends Node2D
+@onready var part_1 = $part1
+@onready var part_2 = $part2
+@onready var part_3 = $part3
+@onready var short_timer = $short_timer
+@onready var long_timer = $long_timer
+#var power_up := preload(\"res://Scenes/Objects/power_up.tscn\")
+var is_hydra : bool = false
+var Player_pos : Vector2
+var speed = 200
+var items :  Array = [\"gas\", \"shield\", \"life\"]
+func _ready():
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var power_up := preload(\"res://Scenes/Objects/power_up.tscn\").instantiate()
+	
+	
+	power_up.power_up[items[random.randi_range(0, 2)]] = true
+	if is_hydra:
+		power_up.global_position = Player_pos
+	else:
+		power_up.position = self.global_position
+
+	get_parent().add_child(power_up)
+	short_timer.start()
+	long_timer.start()
+
+func _process(delta):
+#	.transform.x *= speed * delta
+	part_1.position += Vector2(0, -speed) * delta
+	part_2.position += Vector2(speed,0) * delta
+	part_3.position += Vector2(-speed,speed) * delta
+
+
+func _on_timer_timeout():
+	self.queue_free()
+
+
+func _on_short_timer_timeout():
+	speed = 10
+"
+
+[node name="Death_extending" type="Node2D"]
+script = SubResource("GDScript_i4vg2")
+
+[node name="part1" type="Sprite2D" parent="."]
+position = Vector2(13, -14)
+texture = ExtResource("1_026kq")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="part2" type="Sprite2D" parent="."]
+position = Vector2(3, 19)
+texture = ExtResource("2_rpwqj")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="part3" type="Sprite2D" parent="."]
+position = Vector2(-31, 2)
+texture = ExtResource("3_wlokh")
+hframes = 2
+
+[node name="long_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="short_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="long_timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="short_timer" to="." method="_on_short_timer_timeout"]

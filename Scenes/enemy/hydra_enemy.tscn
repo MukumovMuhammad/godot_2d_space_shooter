@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://6nlo2f18jx6a"]
+
+[ext_resource type="Script" path="res://Scenes/enemy/hydra_enemy.gd" id="1_68xsl"]
+[ext_resource type="Texture2D" uid="uid://bmu86v5506471" path="res://essets/kenney_space-shooter-redux/PNG/Enemies/enemyBlue3.png" id="1_x5w5s"]
+[ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="2_e7wd0"]
+[ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="3_0xhxk"]
+[ext_resource type="PackedScene" uid="uid://6dqj4e13qp7o" path="res://Scenes/Common/sharp_muzzle.tscn" id="5_5crgn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8yib3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x5w5s")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qx3g3"]
+radius = 35.0
+height = 98.0
+
+[node name="Hydra_enemy" type="CharacterBody2D" node_paths=PackedStringArray("components") groups=["hydra", "ship"]]
+collision_layer = 8
+collision_mask = 14
+script = ExtResource("1_68xsl")
+components = NodePath("ship_timers_&_sprites")
+
+[node name="muzzle" parent="." instance=ExtResource("5_5crgn")]
+position = Vector2(30, 0)
+rotation = 1.5708
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_8yib3")
+animation = &"blue"
+
+[node name="hit_area" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("2_e7wd0")]
+position = Vector2(-2, 1)
+scale = Vector2(1.26, 1.755)
+collision_layer = 2
+collision_mask = 6
+Ship = NodePath("..")
+can_get_power_up = false
+
+[node name="ship_timers_&_sprites" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_0xhxk")]
+Ship = NodePath("..")
+wait_times = {
+"shield": 2,
+"shoot": 3.0,
+"turbo": 0.1
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -1)
+shape = SubResource("CapsuleShape2D_qx3g3")
+
+[node name="bounce_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="bounce_back" from="muzzle" to="." method="_on_muzzle_bounce_back"]
+[connection signal="timeout" from="bounce_timer" to="." method="_on_bounce_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

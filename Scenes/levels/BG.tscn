@@ -1,0 +1,309 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbruw83qw7lhy"]
+
+[ext_resource type="Texture2D" uid="uid://61kh5nmjkfhg" path="res://essets/kenney_space-shooter-redux/Backgrounds/blue.png" id="1_khtp8"]
+
+[sub_resource type="GDScript" id="GDScript_15qh4"]
+script/source = "extends ParallaxBackground
+
+var scrolling_speed = 50
+
+
+func _process(delta):
+	scroll_offset.x -= scrolling_speed * delta
+	
+"
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = SubResource("GDScript_15qh4")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2(590, -287)
+motion_mirroring = Vector2(3000, 1500)
+
+[node name="Blue" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-509, 90)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue2" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(0, 90)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue3" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-253, 90)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue4" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1273, 90)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue5" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-764, 90)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue6" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1017, 90)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue7" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-508, 346)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue8" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1, 346)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue9" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-252, 346)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue10" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1272, 346)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue11" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-763, 346)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue12" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1016, 346)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue13" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-509, 598)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue14" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(0, 598)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue15" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-253, 598)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue16" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1273, 598)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue17" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-764, 598)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue18" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1017, 598)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue19" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-508, 854)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue20" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1, 854)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue21" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-252, 854)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue22" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1272, 854)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue23" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-763, 854)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue24" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1016, 854)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue25" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1019, 89)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue26" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1528, 89)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue27" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1275, 89)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue28" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(255, 89)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue29" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(764, 89)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue30" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(511, 89)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue31" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1020, 345)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue32" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1529, 345)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue33" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1276, 345)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue34" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(256, 345)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue35" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(765, 345)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue36" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(512, 345)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue37" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1019, 597)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue38" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1528, 597)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue39" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1275, 597)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue40" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(255, 597)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue41" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(764, 597)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue42" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(511, 597)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue43" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1020, 853)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue44" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1529, 853)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue45" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1276, 853)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue46" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(256, 853)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue47" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(765, 853)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue48" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(512, 853)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue49" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-509, 1110)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue50" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(0, 1110)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue51" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-253, 1110)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue52" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1273, 1110)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue53" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-764, 1110)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue54" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1017, 1110)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue55" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-508, 1366)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue56" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1, 1366)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue57" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-252, 1366)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue58" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1272, 1366)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue59" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-763, 1366)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue60" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(-1016, 1366)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue61" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1019, 1109)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue62" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1528, 1109)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue63" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1275, 1109)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue64" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(255, 1109)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue65" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(764, 1109)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue66" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(511, 1109)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue67" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1020, 1365)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue68" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1529, 1365)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue69" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1276, 1365)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue70" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(256, 1365)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue71" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(765, 1365)
+texture = ExtResource("1_khtp8")
+
+[node name="Blue72" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(512, 1365)
+texture = ExtResource("1_khtp8")

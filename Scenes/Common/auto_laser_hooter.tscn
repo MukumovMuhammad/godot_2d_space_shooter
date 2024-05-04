@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfgy2eh8mdr4w"]
+
+[ext_resource type="Texture2D" uid="uid://c456kkelscaes" path="res://essets/kenney_space-shooter-redux/PNG/Parts/gun00.png" id="1_8etfh"]
+[ext_resource type="Script" path="res://Scenes/Common/auto_laser_hooter.gd" id="1_aurf7"]
+[ext_resource type="PackedScene" uid="uid://c7dmfvpyg2wvu" path="res://Scenes/Common/shooter_muzzle.tscn" id="3_hap30"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3nna1"]
+radius = 490.147
+
+[node name="auto_laser_shooter" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_aurf7")
+
+[node name="gun" type="Marker2D" parent="."]
+rotation = 0.0213967
+
+[node name="shooter_muzzle" parent="gun" instance=ExtResource("3_hap30")]
+position = Vector2(50.9883, -1.09115)
+rotation = 1.5494
+
+[node name="Gun00" type="Sprite2D" parent="gun"]
+position = Vector2(31.014, 0)
+rotation = -1.5708
+texture = ExtResource("1_8etfh")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+autostart = true
+
+[node name="destroy_timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3nna1")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="destroy_timer" to="." method="_on_destroy_timer_timeout"]

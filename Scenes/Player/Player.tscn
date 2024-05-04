@@ -1,0 +1,208 @@
+[gd_scene load_steps=13 format=3 uid="uid://cfituemdujrmu"]
+
+[ext_resource type="PackedScene" uid="uid://34o43kry1nf7" path="res://Scenes/Common/Ship_component.tscn" id="1_o5gx6"]
+[ext_resource type="Texture2D" uid="uid://61fcdq315jyg" path="res://essets/kenney_space-shooter-redux/PNG/playerShip3_blue.png" id="1_s7uge"]
+[ext_resource type="PackedScene" uid="uid://6dqj4e13qp7o" path="res://Scenes/Common/sharp_muzzle.tscn" id="1_tjmdd"]
+[ext_resource type="PackedScene" uid="uid://xi8cw7iq872a" path="res://Scenes/Common/hit_area.tscn" id="3_iyree"]
+[ext_resource type="Texture2D" uid="uid://cs51bct2gvipp" path="res://essets/kenney_space-shooter-redux/PNG/Damage/playerShip3_damage2.png" id="4_ntwb1"]
+[ext_resource type="Texture2D" uid="uid://clr8jmar8lgi4" path="res://essets/kenney_space-shooter-redux/PNG/Damage/playerShip3_damage1.png" id="4_sv2xn"]
+[ext_resource type="PackedScene" uid="uid://c7dmfvpyg2wvu" path="res://Scenes/Common/shooter_muzzle.tscn" id="5_ghwmh"]
+[ext_resource type="Texture2D" uid="uid://cbmpeq610i5py" path="res://essets/kenney_space-shooter-redux/PNG/Damage/playerShip3_damage3.png" id="6_yfwhl"]
+
+[sub_resource type="GDScript" id="GDScript_jpu6n"]
+script/source = "extends ship
+@onready var sharps = $sharps
+@onready var sharp_timer = $Sharp_timer
+
+
+func _ready():
+	max_life = 10
+	shoot_level = 2
+	sharps.hide()
+	sharps.monitoring = false
+	print_debug(\"The child's ready\")
+	class_ready()
+
+
+
+func _process(delta):
+	if Input.is_action_pressed(\"space\"):
+		shoot()
+	#if Input.is_action_just_pressed(\"mouse_left\") and can_shoot:
+	#	print_debug(\"The rotation of player is \" , self.rotation)
+	#	look_at(get_global_mouse_position())
+	#	shoot(muzzle)
+
+
+
+func _physics_process(delta):
+	move_to_forward(Input.get_axis(\"down\", \"up\"))
+	ship_rotate(Input.get_axis(\"left\", \"right\"))
+	#move_to_sides(Input.get_axis(\"left\", \"right\"))
+	
+	#muzzle.look_at(get_global_mouse_position())
+	if Input.is_action_pressed(\"turbo\"):
+		turbo_move()
+	
+	
+	move_and_slide()
+
+\"\"\"
+func shoot_upgrade(shoot : float, turbo : float, shield : float):
+	shoot_level += 1
+	sharp_timer.wait_time += shield
+	if components.wait_times[\"shoot\"] > 0.15:
+		components.wait_times[\"shoot\"] -= shoot
+	if components.wait_times[\"turbo\"] > 0.30:
+		components.wait_times[\"turbo\"] += turbo
+	if components.wait_times[\"shield\"] < 10:
+		components.wait_times[\"shield\"] += shield
+	print_debug(components.wait_times)
+	components.update_timers(components.wait_times)
+	sharp_timer.start()
+	sharps.show()
+	sharps.monitoring = true
+	trigger_shield(1)
+\"\"\"
+
+func upgrade(ability: String):
+	
+	
+	if ability == \"speed\" and speed < 500.0:
+		speed += 50.0
+		turbo_speed = speed * 2
+	elif ability == \"faster_shoot\" and components.wait_times[\"shoot\"] > 0.15:
+		components.wait_times[\"shoot\"] -= 0.05
+	elif ability == \"shield_time\" and components.wait_times[\"shield\"] < 30:
+		components.wait_times[\"shield\"] += 3.0
+	elif ability == \"laser\" and shoot_level < 8:
+		shoot_level += 2
+	elif ability == \"max_life\" and max_life < 30:
+		max_life += 2
+	elif ability == \"turbo\" and components.wait_times[\"turbo\"] < 3.0:
+		components.wait_times[\"turbo\"] += 0.2
+	elif ability == \"ufo_shooter\":
+		var ufo_shooter = preload(\"res://Scenes/Common/ufo_shooter.tscn\").instantiate()
+		ufo_shooter.get_node(\"auto_laser_shooter\").shoot_for_player = true
+		ufo_shooter.get_node(\"auto_laser_shooter\").set_collision_mask_value(2,true)
+		ufo_shooter.get_node(\"auto_laser_shooter\").set_collision_mask_value(4,true)
+		add_child(ufo_shooter)
+		
+	current_life = max_life
+	lifes_left.emit(current_life)
+	components.update_timers(components.wait_times)
+
+func _on_sharp_timer_timeout():
+	sharps.hide()
+	sharps.monitoring = false
+
+@warning_ignore(\"unused_parameter\")
+func Death(player_shot : bool):
+	game_manager.Player_died()
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cce1"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s7uge")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xpks5"]
+radius = 32.0
+height = 94.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rh2i7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sv2xn")
+}],
+"loop": true,
+"name": &"1st_demage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ntwb1")
+}],
+"loop": true,
+"name": &"2nd_demage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_yfwhl")
+}],
+"loop": true,
+"name": &"3rd_demage",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("components", "Shooter_Muzzle") groups=["Player", "ship"]]
+collision_layer = 4
+collision_mask = 2
+script = SubResource("GDScript_jpu6n")
+rotation_speed = 15.0
+speed = 500.0
+components = NodePath("Timers")
+Shooter_Muzzle = NodePath("shooter_muzzle")
+
+[node name="sharps" parent="." instance=ExtResource("1_tjmdd")]
+position = Vector2(10, 0)
+rotation = 1.5708
+scale = Vector2(1.2, 1.2)
+collision_mask = 15
+hydra_kill = true
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_0cce1")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xpks5")
+
+[node name="Timers" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("1_o5gx6")]
+Ship = NodePath("..")
+show_life_bar = false
+
+[node name="hit_area" parent="." node_paths=PackedStringArray("Ship") instance=ExtResource("3_iyree")]
+visible = false
+position = Vector2(-1.99, -2)
+scale = Vector2(1.46, 1.55)
+collision_layer = 2
+collision_mask = 2
+Ship = NodePath("..")
+
+[node name="shooter_muzzle" parent="." instance=ExtResource("5_ghwmh")]
+position = Vector2(60, 0)
+rotation = 2.35619
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_rh2i7")
+animation = &"idle"
+
+[node name="Sharp_timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="Sharp_timer" to="." method="_on_sharp_timer_timeout"]

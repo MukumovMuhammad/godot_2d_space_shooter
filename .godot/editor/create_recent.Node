@@ -1,0 +1,14 @@
+Marker2D
+Node2D
+Node
+Timer
+CollisionShape2D
+Area2D
+PathFollow2D
+Path2D
+Label
+Button
+HBoxContainer
+Panel
+VisibleOnScreenNotifier2D
+AnimatedSprite2D

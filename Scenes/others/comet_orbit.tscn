@@ -1,0 +1,568 @@
+[gd_scene load_steps=12 format=3 uid="uid://ce6xybommmmwk"]
+
+[ext_resource type="Texture2D" uid="uid://cs6l3xghnv0av" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_big1.png" id="1_5k1vc"]
+[ext_resource type="Texture2D" uid="uid://dfxmw5rcirxjw" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_big2.png" id="2_xoel5"]
+[ext_resource type="Texture2D" uid="uid://be5u126vxkut8" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_big3.png" id="3_27jkp"]
+[ext_resource type="Texture2D" uid="uid://qibhe3xjacl2" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_big4.png" id="4_x6me0"]
+[ext_resource type="Texture2D" uid="uid://chkuympm5q6c0" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_med1.png" id="5_2agqh"]
+[ext_resource type="Texture2D" uid="uid://c1sl3n5owt15x" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_med3.png" id="6_pck1m"]
+[ext_resource type="Texture2D" uid="uid://c7nmmmdatqmci" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_small1.png" id="7_h2em6"]
+[ext_resource type="Texture2D" uid="uid://cns7n4ffebb7b" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_small2.png" id="8_trxth"]
+[ext_resource type="Texture2D" uid="uid://c0rwxm4sn7v2" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_tiny1.png" id="9_4kxis"]
+[ext_resource type="Texture2D" uid="uid://dh3jtus2tyn2d" path="res://essets/kenney_space-shooter-redux/PNG/Meteors/meteorBrown_tiny2.png" id="10_cm3a2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unlnb"]
+size = Vector2(738, 344.5)
+
+[node name="Comet_orbit" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(36, -25.25)
+shape = SubResource("RectangleShape2D_unlnb")
+
+[node name="MeteorBrownBig1" type="Sprite2D" parent="."]
+position = Vector2(245, 65)
+rotation = 1.309
+texture = ExtResource("1_5k1vc")
+
+[node name="MeteorBrownBig2" type="Sprite2D" parent="."]
+position = Vector2(279, -17)
+rotation = 1.309
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig3" type="Sprite2D" parent="."]
+position = Vector2(-55, 87)
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownBig4" type="Sprite2D" parent="."]
+position = Vector2(72, 116)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed1" type="Sprite2D" parent="."]
+position = Vector2(-256, 42)
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed3" type="Sprite2D" parent="."]
+position = Vector2(-20, 130)
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall1" type="Sprite2D" parent="."]
+position = Vector2(184, -131)
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownBig5" type="Sprite2D" parent="."]
+position = Vector2(219, -101)
+rotation = -4.71238
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig6" type="Sprite2D" parent="."]
+position = Vector2(85, -186)
+rotation = -3.03793
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownBig7" type="Sprite2D" parent="."]
+position = Vector2(356.436, 17.6727)
+rotation = -3.03793
+scale = Vector2(1.06669, 1.06306)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownBig16" type="Sprite2D" parent="."]
+position = Vector2(88.5, -62.0197)
+rotation = 1.309
+texture = ExtResource("1_5k1vc")
+
+[node name="MeteorBrownBig17" type="Sprite2D" parent="."]
+position = Vector2(-80, -102)
+rotation = 1.309
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig18" type="Sprite2D" parent="."]
+position = Vector2(-205, 71)
+rotation = 1.309
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownBig19" type="Sprite2D" parent="."]
+position = Vector2(-296, -130)
+rotation = 1.309
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed11" type="Sprite2D" parent="."]
+position = Vector2(-299, -44)
+rotation = 1.309
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed12" type="Sprite2D" parent="."]
+position = Vector2(-226.5, -4.01968)
+rotation = 1.309
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall10" type="Sprite2D" parent="."]
+position = Vector2(23, 73)
+rotation = 1.309
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownBig20" type="Sprite2D" parent="."]
+position = Vector2(175, -10)
+rotation = -2.09439
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig21" type="Sprite2D" parent="."]
+position = Vector2(139, 79)
+rotation = -1.57079
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownBig22" type="Sprite2D" parent="."]
+position = Vector2(50.917, -139.514)
+rotation = -1.83259
+scale = Vector2(1, 0.958654)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed2" type="Sprite2D" parent="."]
+position = Vector2(-274, -60)
+rotation = -3.03793
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed4" type="Sprite2D" parent="."]
+position = Vector2(175, 151)
+rotation = -3.03793
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall3" type="Sprite2D" parent="."]
+position = Vector2(-76.0001, 45)
+rotation = -3.03793
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownSmall2" type="Sprite2D" parent="."]
+position = Vector2(52, 93)
+texture = ExtResource("8_trxth")
+
+[node name="MeteorBrownBig8" type="Sprite2D" parent="."]
+position = Vector2(-252, -163)
+texture = ExtResource("1_5k1vc")
+
+[node name="MeteorBrownBig9" type="Sprite2D" parent="."]
+position = Vector2(86, -168)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownSmall4" type="Sprite2D" parent="."]
+position = Vector2(54, -8)
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownBig10" type="Sprite2D" parent="."]
+position = Vector2(-9.00001, 16)
+rotation = -4.18878
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig11" type="Sprite2D" parent="."]
+position = Vector2(133, -120)
+rotation = -3.03793
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownBig12" type="Sprite2D" parent="."]
+position = Vector2(138, 116)
+rotation = -3.14159
+scale = Vector2(1.74278, 1.48546)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed5" type="Sprite2D" parent="."]
+position = Vector2(-75, -185)
+rotation = -3.03793
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed6" type="Sprite2D" parent="."]
+position = Vector2(-20.0001, 149.98)
+rotation = -3.03793
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall5" type="Sprite2D" parent="."]
+position = Vector2(-8.00002, 51)
+rotation = -3.03793
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownMed7" type="Sprite2D" parent="."]
+position = Vector2(-44, -29)
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall7" type="Sprite2D" parent="."]
+position = Vector2(298, -32)
+rotation = 1.309
+texture = ExtResource("8_trxth")
+
+[node name="MeteorBrownBig23" type="Sprite2D" parent="."]
+position = Vector2(62, 72)
+rotation = -1.0472
+texture = ExtResource("1_5k1vc")
+
+[node name="MeteorBrownBig24" type="Sprite2D" parent="."]
+position = Vector2(-78, 4.00001)
+rotation = -1.0472
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownSmall11" type="Sprite2D" parent="."]
+position = Vector2(-130, -176)
+rotation = -1.0472
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownBig25" type="Sprite2D" parent="."]
+position = Vector2(-173, -175)
+rotation = -5.75958
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig26" type="Sprite2D" parent="."]
+position = Vector2(-121, 107)
+rotation = -4.18878
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed13" type="Sprite2D" parent="."]
+position = Vector2(83.0001, 22)
+rotation = -4.18878
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownBig27" type="Sprite2D" parent="."]
+position = Vector2(-194.564, -94.5274)
+rotation = -1.0472
+scale = Vector2(1.2568, 1.06563)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownSmall12" type="Sprite2D" parent="."]
+position = Vector2(-222.538, -103.564)
+rotation = -1.0472
+texture = ExtResource("8_trxth")
+
+[node name="MeteorBrownSmall8" type="Sprite2D" parent="."]
+position = Vector2(-170, -136)
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownMed8" type="Sprite2D" parent="."]
+position = Vector2(-91, -57)
+rotation = -2.87979
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownBig13" type="Sprite2D" parent="."]
+position = Vector2(-157, -16)
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownMed9" type="Sprite2D" parent="."]
+position = Vector2(108, 82)
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownBig14" type="Sprite2D" parent="."]
+position = Vector2(-317, 83)
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownBig15" type="Sprite2D" parent="."]
+position = Vector2(-286, 84)
+rotation = -3.14159
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed10" type="Sprite2D" parent="."]
+position = Vector2(158, 38)
+rotation = -2.87979
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall9" type="Sprite2D" parent="."]
+position = Vector2(-92, -74)
+rotation = -3.03793
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownSmall6" type="Sprite2D" parent="."]
+position = Vector2(71, -75)
+texture = ExtResource("8_trxth")
+
+[node name="MeteorBrownTiny1" type="Sprite2D" parent="."]
+position = Vector2(79, 154)
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownBig29" type="Sprite2D" parent="."]
+position = Vector2(-13, -106.5)
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownMed18" type="Sprite2D" parent="."]
+position = Vector2(23, -34.4999)
+rotation = -1.57079
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed19" type="Sprite2D" parent="."]
+position = Vector2(-44, -103.5)
+rotation = 1.57079
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed20" type="Sprite2D" parent="."]
+position = Vector2(11, -114.5)
+rotation = -1.309
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownTiny4" type="Sprite2D" parent="."]
+position = Vector2(-73, -31.4999)
+rotation = 1.57079
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownBig28" type="Sprite2D" parent="."]
+position = Vector2(-288, -20)
+rotation = 0.261799
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownMed14" type="Sprite2D" parent="."]
+position = Vector2(-272, -89)
+rotation = -1.309
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed15" type="Sprite2D" parent="."]
+position = Vector2(-250, 142)
+rotation = -1.309
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed16" type="Sprite2D" parent="."]
+position = Vector2(-188, 120)
+rotation = 1.83259
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed17" type="Sprite2D" parent="."]
+position = Vector2(-280, -94)
+rotation = -1.0472
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownTiny3" type="Sprite2D" parent="."]
+position = Vector2(-327, 29)
+rotation = 1.83259
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownMed34" type="Sprite2D" parent="."]
+position = Vector2(321.37, -171.247)
+rotation = 3.66519
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownBig39" type="Sprite2D" parent="."]
+position = Vector2(263, -186)
+rotation = 4.97418
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed35" type="Sprite2D" parent="."]
+position = Vector2(328, -187)
+rotation = 4.97418
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownBig40" type="Sprite2D" parent="."]
+position = Vector2(278, 136)
+rotation = 3.66519
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownBig41" type="Sprite2D" parent="."]
+position = Vector2(381, 102)
+rotation = 0.523598
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownTiny9" type="Sprite2D" parent="."]
+position = Vector2(381, -181)
+rotation = 5.23598
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownBig42" type="Sprite2D" parent="."]
+position = Vector2(409, -70)
+rotation = 3.92699
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownMed36" type="Sprite2D" parent="."]
+position = Vector2(360, -2.00002)
+rotation = 2.35619
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed37" type="Sprite2D" parent="."]
+position = Vector2(355.37, -14.2466)
+rotation = 2.35619
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed38" type="Sprite2D" parent="."]
+position = Vector2(357.37, -90.7465)
+rotation = 5.49778
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed39" type="Sprite2D" parent="."]
+position = Vector2(412.37, -101.746)
+rotation = 2.61799
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownTiny10" type="Sprite2D" parent="."]
+position = Vector2(328.37, -18.7465)
+rotation = 5.49778
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownBig35" type="Sprite2D" parent="."]
+position = Vector2(32, -58)
+rotation = 2.35619
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownSmall14" type="Sprite2D" parent="."]
+position = Vector2(274, -192)
+rotation = -2.09439
+texture = ExtResource("7_h2em6")
+
+[node name="MeteorBrownBig36" type="Sprite2D" parent="."]
+position = Vector2(362, -136)
+texture = ExtResource("2_xoel5")
+
+[node name="MeteorBrownBig37" type="Sprite2D" parent="."]
+position = Vector2(222.12, -98.6265)
+rotation = 1.0472
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownBig38" type="Sprite2D" parent="."]
+position = Vector2(150.12, -155.626)
+rotation = -2.09439
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownMed30" type="Sprite2D" parent="."]
+position = Vector2(186.12, -73.1264)
+rotation = -0.261799
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed31" type="Sprite2D" parent="."]
+position = Vector2(142.12, -121.626)
+rotation = -0.261799
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed32" type="Sprite2D" parent="."]
+position = Vector2(144.12, -198.126)
+rotation = 2.87979
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed33" type="Sprite2D" parent="."]
+position = Vector2(199.12, -209.126)
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownTiny8" type="Sprite2D" parent="."]
+position = Vector2(115.12, -126.126)
+rotation = 2.87979
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownBig31" type="Sprite2D" parent="."]
+position = Vector2(-35.7818, -191)
+rotation = -1.83259
+scale = Vector2(1.01036, 1.04198)
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownBig32" type="Sprite2D" parent="."]
+position = Vector2(-104, -183)
+rotation = -4.97418
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownMed26" type="Sprite2D" parent="."]
+position = Vector2(199.294, -187.405)
+rotation = -4.97418
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed27" type="Sprite2D" parent="."]
+position = Vector2(160, -55)
+rotation = -4.97418
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownBig33" type="Sprite2D" parent="."]
+position = Vector2(14, 109)
+rotation = -1.83259
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownBig34" type="Sprite2D" parent="."]
+position = Vector2(-130, -71)
+rotation = -1.83259
+texture = ExtResource("4_x6me0")
+
+[node name="MeteorBrownTiny6" type="Sprite2D" parent="."]
+position = Vector2(21, -169)
+rotation = -1.83259
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownMed28" type="Sprite2D" parent="."]
+position = Vector2(-128.706, -146.905)
+rotation = -3.14159
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed29" type="Sprite2D" parent="."]
+position = Vector2(-172.706, -195.405)
+rotation = -3.14159
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownTiny7" type="Sprite2D" parent="."]
+position = Vector2(-199.706, -199.905)
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownMed21" type="Sprite2D" parent="."]
+position = Vector2(322.332, -12.3781)
+rotation = 1.309
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownBig30" type="Sprite2D" parent="."]
+position = Vector2(250, -22)
+rotation = 2.61799
+texture = ExtResource("3_27jkp")
+
+[node name="MeteorBrownMed22" type="Sprite2D" parent="."]
+position = Vector2(279.332, -98.3781)
+rotation = 2.61799
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed23" type="Sprite2D" parent="."]
+position = Vector2(351.832, -58.3978)
+rotation = 2.61799
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownSmall13" type="Sprite2D" parent="."]
+position = Vector2(334, -84)
+rotation = 0.261799
+texture = ExtResource("8_trxth")
+
+[node name="MeteorBrownMed24" type="Sprite2D" parent="."]
+position = Vector2(356.332, 144.622)
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed25" type="Sprite2D" parent="."]
+position = Vector2(358.332, 68.1219)
+rotation = 3.14159
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownTiny5" type="Sprite2D" parent="."]
+position = Vector2(329.332, 140.122)
+rotation = 3.14159
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownMed40" type="Sprite2D" parent="."]
+position = Vector2(-310, 47)
+rotation = 3.40339
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownMed41" type="Sprite2D" parent="."]
+position = Vector2(-151, 42)
+rotation = 3.40339
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownTiny11" type="Sprite2D" parent="."]
+position = Vector2(-243.668, 77.2218)
+rotation = 6.54498
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownMed42" type="Sprite2D" parent="."]
+position = Vector2(403, 2)
+rotation = 3.66519
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed43" type="Sprite2D" parent="."]
+position = Vector2(-199, 148)
+rotation = 1.0472
+texture = ExtResource("6_pck1m")
+
+[node name="MeteorBrownMed44" type="Sprite2D" parent="."]
+position = Vector2(-290, 141)
+rotation = 4.18878
+texture = ExtResource("5_2agqh")
+
+[node name="MeteorBrownTiny12" type="Sprite2D" parent="."]
+position = Vector2(-190.92, 283.298)
+rotation = 4.18878
+scale = Vector2(4.17987, 0.00308642)
+texture = ExtResource("9_4kxis")
+
+[node name="MeteorBrownTiny2" type="Sprite2D" parent="."]
+position = Vector2(98, -45)
+texture = ExtResource("10_cm3a2")

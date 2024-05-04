@@ -1,0 +1,54 @@
+Godot Engine v4.1.3.stable.mono.official.f06b6836a - https://godotengine.org
+Vulkan API 1.3.238 - Forward Mobile - Using Vulkan Device #0: Intel - Intel(R) Xe Graphics (TGL GT2)
+ 
+ERROR: Cannot open file 'res://Ship_component.tscn'.
+   at: load (scene/resources/resource_format_text.cpp:1638)
+ERROR: Failed loading resource: res://Ship_component.tscn. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:273)
+SCRIPT ERROR: Parse Error: Could not resolve super class "ship".
+          at: GDScript::reload (res://Scenes/Player/Player.tscn::GDScript_jpu6n:1)
+ERROR: res://Scenes/Player/Player.tscn:51 - Parse Error: [ext_resource] referenced non-existent resource at: res://Ship_component.tscn
+   at: _parse_ext_resource (scene/resources/resource_format_text.cpp:162)
+WARNING: Node './Timers' was modified from inside an instance, but it has vanished.
+     at: instantiate (scene/resources/packed_scene.cpp:182)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+WARNING: 2 RIDs of type "Texture" were leaked.
+     at: finalize (drivers/vulkan/rendering_device_vulkan.cpp:9443)
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/texture.cpp:1079)
+Godot Engine v4.1.3.stable.mono.official.f06b6836a - https://godotengine.org
+Vulkan API 1.3.238 - Forward Mobile - Using Vulkan Device #0: Intel - Intel(R) Xe Graphics (TGL GT2)
+ 
+ERROR: Cannot open file 'res://Ship_component.tscn'.
+   at: load (scene/resources/resource_format_text.cpp:1638)
+ERROR: Failed loading resource: res://Ship_component.tscn. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:273)
+SCRIPT ERROR: Parse Error: Could not resolve super class "ship".
+          at: GDScript::reload (res://Scenes/Player/Player.tscn::GDScript_jpu6n:1)
+ERROR: res://Scenes/Player/Player.tscn:51 - Parse Error: [ext_resource] referenced non-existent resource at: res://Ship_component.tscn
+   at: _parse_ext_resource (scene/resources/resource_format_text.cpp:162)
+WARNING: Node './Timers' was modified from inside an instance, but it has vanished.
+     at: instantiate (scene/resources/packed_scene.cpp:182)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+WARNING: 2 RIDs of type "Texture" were leaked.
+     at: finalize (drivers/vulkan/rendering_device_vulkan.cpp:9443)
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/texture.cpp:1079)
+Godot Engine v4.1.3.stable.mono.official.f06b6836a - https://godotengine.org
+Vulkan API 1.3.238 - Forward Mobile - Using Vulkan Device #0: Intel - Intel(R) Xe Graphics (TGL GT2)
+ 
+ERROR: Cannot open file 'res://Ship_component.tscn'.
+   at: load (scene/resources/resource_format_text.cpp:1638)
+ERROR: Failed loading resource: res://Ship_component.tscn. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:273)
+SCRIPT ERROR: Parse Error: Could not resolve super class "ship".
+          at: GDScript::reload (res://Scenes/Player/Player.tscn::GDScript_jpu6n:1)
+ERROR: res://Scenes/Player/Player.tscn:51 - Parse Error: [ext_resource] referenced non-existent resource at: res://Ship_component.tscn
+   at: _parse_ext_resource (scene/resources/resource_format_text.cpp:162)
+WARNING: Node './Timers' was modified from inside an instance, but it has vanished.
+     at: instantiate (scene/resources/packed_scene.cpp:182)
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+WARNING: 2 RIDs of type "Texture" were leaked.
+     at: finalize (drivers/vulkan/rendering_device_vulkan.cpp:9443)
+ERROR: Parameter "RenderingServer::get_singleton()" is null.
+   at: ~CompressedTexture2D (scene/resources/texture.cpp:1079)

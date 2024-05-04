@@ -1,0 +1,226 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1jjonrbn5n02"]
+
+[ext_resource type="Script" path="res://Scenes/UI/HUD.gd" id="1_rdh23"]
+[ext_resource type="FontFile" uid="uid://cc87gpb5dumy3" path="res://essets/kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="2_f5pjs"]
+[ext_resource type="FontFile" uid="uid://c273naw07d1b8" path="res://essets/kenney_space-shooter-redux/Bonus/kenvector_future_thin.ttf" id="3_6cy3p"]
+
+[node name="HUD" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rdh23")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+process_mode = 1
+offset_left = 1419.0
+offset_top = 44.0
+offset_right = 1632.0
+offset_bottom = 71.0
+tooltip_text = "Turbo"
+value = 100.0
+
+[node name="turboLabel" type="Label" parent="CanvasLayer/ProgressBar"]
+layout_mode = 0
+offset_left = -70.0
+offset_top = 4.0
+offset_right = 144.0
+offset_bottom = 30.0
+text = "Turbo"
+
+[node name="timer" type="Label" parent="CanvasLayer"]
+process_mode = 1
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 235.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_f5pjs")
+theme_override_font_sizes/font_size = 35
+text = "Time: 0"
+
+[node name="score" type="Label" parent="CanvasLayer"]
+process_mode = 1
+offset_left = 7.0
+offset_top = 67.0
+offset_right = 234.0
+offset_bottom = 127.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_f5pjs")
+theme_override_font_sizes/font_size = 35
+text = "SCORE: 0"
+
+[node name="shield_progress_bar" type="ProgressBar" parent="CanvasLayer"]
+process_mode = 1
+anchors_preset = -1
+anchor_left = 0.899
+anchor_top = 0.903
+anchor_right = 0.899
+anchor_bottom = 0.903
+offset_left = -133.472
+offset_top = -8.71606
+offset_right = 134.528
+offset_bottom = 18.2839
+grow_horizontal = 0
+grow_vertical = 0
+value = 50.0
+show_percentage = false
+
+[node name="shieldLabel" type="Label" parent="CanvasLayer/shield_progress_bar"]
+layout_mode = 0
+offset_left = -51.9999
+offset_top = 2.00012
+offset_right = 162.0
+offset_bottom = 28.0001
+text = "Shield"
+
+[node name="Label" type="Label" parent="CanvasLayer/shield_progress_bar"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -149.0
+offset_top = -23.9999
+offset_right = -109.0
+offset_bottom = -0.999878
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Lifes" type="Node" parent="CanvasLayer"]
+process_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Lifes"]
+anchors_preset = -1
+anchor_left = 0.088
+anchor_top = 0.933
+anchor_right = 0.137
+anchor_bottom = 0.961
+offset_left = -0.0640106
+offset_top = 0.123962
+offset_right = 0.263977
+offset_bottom = -0.092041
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="label" type="Label" parent="CanvasLayer/Lifes"]
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.945
+anchor_right = 0.104
+anchor_bottom = 0.945
+offset_left = 0.719999
+offset_top = -18.54
+offset_right = -0.712006
+offset_bottom = 19.46
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_f5pjs")
+theme_override_font_sizes/font_size = 30
+text = "Lifes : 5"
+
+[node name="abilites" type="HBoxContainer" parent="CanvasLayer"]
+process_mode = 2
+anchors_preset = -1
+anchor_left = 0.126
+anchor_top = 0.744
+anchor_right = 0.839
+anchor_bottom = 0.918
+offset_left = 0.272003
+offset_top = -0.16803
+offset_right = 5.20789
+offset_bottom = -0.296021
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="speed" type="Button" parent="CanvasLayer/abilites"]
+layout_mode = 2
+tooltip_text = "Increase speed of ship"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "50+
+ship
+speed
+"
+
+[node name="speed2" type="Button" parent="CanvasLayer/abilites"]
+layout_mode = 2
+tooltip_text = "turbo will last longer"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "decrease 
+turbo
+consuption
+"
+
+[node name="faster_shoot" type="Button" parent="CanvasLayer/abilites"]
+layout_mode = 2
+tooltip_text = "shoot Delay time will be decreased"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "faster
+shoot"
+
+[node name="shield_time" type="Button" parent="CanvasLayer/abilites"]
+layout_mode = 2
+tooltip_text = "The shield durations will be increased by 2 seconds"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "+2
+seconds
+shield
+"
+
+[node name="max_life" type="Button" parent="CanvasLayer/abilites"]
+layout_mode = 2
+tooltip_text = "The max life of Player will be increased by 2"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "+2
+max life"
+
+[node name="Super_abilities" type="HBoxContainer" parent="CanvasLayer"]
+process_mode = 2
+anchors_preset = -1
+anchor_left = 0.126
+anchor_top = 0.744
+anchor_right = 0.839
+anchor_bottom = 0.918
+offset_left = -165.728
+offset_top = -400.168
+offset_right = 226.208
+offset_bottom = -390.296
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="laser" type="Button" parent="CanvasLayer/Super_abilities"]
+layout_mode = 2
+tooltip_text = "adds 2 lasers to player
+now you can shoot with 2 more additional lasers"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "+2
+Lasers"
+
+[node name="Ufo" type="Button" parent="CanvasLayer/Super_abilities"]
+layout_mode = 2
+tooltip_text = "Adds an ufo  that helps you to fight with enimies  shooting them with lasers"
+theme_override_fonts/font = ExtResource("3_6cy3p")
+theme_override_font_sizes/font_size = 50
+text = "+1
+ufo
+shooter"
+
+[connection signal="pressed" from="CanvasLayer/abilites/speed" to="." method="_on_speed_pressed"]
+[connection signal="pressed" from="CanvasLayer/abilites/speed2" to="." method="_on_speed_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/abilites/faster_shoot" to="." method="_on_faster_shoot_pressed"]
+[connection signal="pressed" from="CanvasLayer/abilites/shield_time" to="." method="_on_shield_time_pressed"]
+[connection signal="pressed" from="CanvasLayer/abilites/max_life" to="." method="_on_max_life_pressed"]
+[connection signal="pressed" from="CanvasLayer/Super_abilities/laser" to="." method="_on_laser_pressed"]
+[connection signal="pressed" from="CanvasLayer/Super_abilities/Ufo" to="." method="_on_ufo_pressed"]

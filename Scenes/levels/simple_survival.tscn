@@ -1,0 +1,219 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr1jo83okavg5"]
+
+[ext_resource type="PackedScene" uid="uid://cbruw83qw7lhy" path="res://Scenes/levels/BG.tscn" id="1_kpwjv"]
+[ext_resource type="PackedScene" uid="uid://de7mirmrxsfwh" path="res://Scenes/UI/pause_menu.tscn" id="1_qv58s"]
+[ext_resource type="PackedScene" uid="uid://d4budg00why4f" path="res://Scenes/Objects/power_up.tscn" id="2_6g23n"]
+[ext_resource type="PackedScene" uid="uid://cfituemdujrmu" path="res://Scenes/Player/Player.tscn" id="3_3oc30"]
+[ext_resource type="PackedScene" uid="uid://b1jjonrbn5n02" path="res://Scenes/UI/HUD.tscn" id="4_50rck"]
+[ext_resource type="PackedScene" uid="uid://ce6xybommmmwk" path="res://Scenes/others/comet_orbit.tscn" id="6_8kydw"]
+[ext_resource type="PackedScene" uid="uid://cwgrios46vh38" path="res://Scenes/others/enemy_spawner.tscn" id="7_r43y6"]
+[ext_resource type="PackedScene" uid="uid://gepktsdfus7f" path="res://Scenes/others/game_manager.tscn" id="8_y604p"]
+
+[node name="survival_lvl" type="Node2D"]
+
+[node name="pause_menu" parent="." instance=ExtResource("1_qv58s")]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_kpwjv")]
+offset = Vector2(500, -500)
+transform = Transform2D(1, 0, 0, 1, 500, -500)
+
+[node name="Start" parent="." instance=ExtResource("2_6g23n")]
+position = Vector2(775, 166)
+power_up = {
+"armo": false,
+"gas": false,
+"life": true,
+"shield": false
+}
+
+[node name="Start2" parent="." instance=ExtResource("2_6g23n")]
+position = Vector2(1329, -82)
+power_up = {
+"armo": false,
+"gas": false,
+"life": false,
+"shield": true
+}
+
+[node name="Start3" parent="." instance=ExtResource("2_6g23n")]
+position = Vector2(-617, -235)
+power_up = {
+"armo": false,
+"gas": true,
+"life": false,
+"shield": false
+}
+
+[node name="Player" parent="." instance=ExtResource("3_3oc30")]
+position = Vector2(45, 55)
+
+[node name="HUD" parent="Player" node_paths=PackedStringArray("Enemies", "Player") instance=ExtResource("4_50rck")]
+scale = Vector2(0.999849, 0.96407)
+Enemies = NodePath("../../enemies")
+Player = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="Comet_orbits" type="Node2D" parent="."]
+
+[node name="Comet_orbit" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-2962, -953)
+rotation = -1.0472
+
+[node name="Comet_orbit2" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-3332, -397)
+rotation = -1.309
+
+[node name="Comet_orbit3" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-3532, 272)
+rotation = -1.57079
+
+[node name="Comet_orbit4" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-2506, -1522)
+rotation = -3.92699
+
+[node name="Comet_orbit5" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-1321, -1908)
+rotation = -3.40339
+
+[node name="Comet_orbit6" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(489, -2064)
+rotation = -6.02138
+
+[node name="Comet_orbit7" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(1129, -1738)
+rotation = -6.02138
+
+[node name="Comet_orbit8" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(1690, -1431)
+rotation = -5.49778
+
+[node name="Comet_orbit9" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-111, -2193)
+rotation = -3.14159
+
+[node name="Comet_orbit10" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-766, -2150)
+rotation = -3.40339
+
+[node name="Comet_orbit11" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-1936, -1751)
+rotation = -3.40339
+
+[node name="Comet_orbit12" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-3424, 964)
+rotation = -1.57079
+
+[node name="Comet_orbit13" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-3225, 1640)
+rotation = -2.24894
+
+[node name="Comet_orbit14" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-2790, 2126)
+rotation = -2.35619
+
+[node name="Comet_orbit15" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-2313, 2545)
+rotation = -2.35619
+
+[node name="Comet_orbit16" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-1735, 2938)
+rotation = -2.61799
+
+[node name="Comet_orbit17" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4213, -544)
+rotation = -6.02138
+
+[node name="Comet_orbit18" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4693, -151)
+rotation = -5.23598
+
+[node name="Comet_orbit19" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(3656, -731)
+rotation = -3.14159
+
+[node name="Comet_orbit20" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(2973, -873)
+rotation = -3.14159
+
+[node name="Comet_orbit21" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(2384, -1035)
+rotation = -2.65309
+
+[node name="Comet_orbit22" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4993, 601)
+rotation = -1.57079
+
+[node name="Comet_orbit23" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4936, 1241)
+rotation = -1.309
+
+[node name="Comet_orbit24" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4885, 1886)
+rotation = -1.57079
+
+[node name="Comet_orbit25" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4752, 2400)
+rotation = -0.523598
+
+[node name="Comet_orbit26" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(4254, 2704)
+rotation = -3.66519
+
+[node name="Comet_orbit27" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(3608, 3079)
+rotation = -0.523598
+
+[node name="Comet_orbit28" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(3125, 3436)
+rotation = -0.523598
+
+[node name="Comet_orbit29" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(2562, 3643)
+rotation = -3.66519
+
+[node name="Comet_orbit30" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(1915, 3968)
+rotation = -0.261799
+
+[node name="Comet_orbit31" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(1257, 4073)
+
+[node name="Comet_orbit32" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(660, 4019)
+rotation = -3.14159
+
+[node name="Comet_orbit33" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(53, 3873)
+rotation = 0.261799
+
+[node name="Comet_orbit34" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-557, 3556)
+rotation = 0.523598
+
+[node name="Comet_orbit35" parent="Comet_orbits" instance=ExtResource("6_8kydw")]
+position = Vector2(-1127, 3279)
+rotation = -2.61799
+
+[node name="comets" type="Node2D" parent="."]
+
+[node name="Game_Manager" parent="." node_paths=PackedStringArray("Player", "Player_HUD", "pause", "camera", "spawner") instance=ExtResource("8_y604p")]
+Player = NodePath("../Player")
+Player_HUD = NodePath("../Player/HUD")
+pause = NodePath("../pause_menu")
+camera = NodePath("../Player/Camera2D")
+spawner = NodePath("spawner")
+
+[node name="spawner" parent="Game_Manager" node_paths=PackedStringArray("enemies", "meteords") instance=ExtResource("7_r43y6")]
+enemies = NodePath("../../enemies")
+meteords = NodePath("../../comets")
+
+[node name="power_ups" type="Node2D" parent="."]
+
+[node name="turels" type="Node" parent="."]
+
+[connection signal="lifes_left" from="Player" to="Player/HUD" method="_on_player_lifes_left"]
+[connection signal="shield_time_left" from="Player" to="Player/HUD" method="_on_player_shield_time_left"]
+[connection signal="turbo_left" from="Player" to="Player/HUD" method="_on_player_turbo_left"]

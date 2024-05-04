@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://xi8cw7iq872a"]
+
+[ext_resource type="Script" path="res://Scenes/Common/hit_area.gd" id="1_s06qq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxwt4"]
+radius = 26.0
+height = 62.0
+
+[node name="hit_area" type="Area2D"]
+script = ExtResource("1_s06qq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_uxwt4")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

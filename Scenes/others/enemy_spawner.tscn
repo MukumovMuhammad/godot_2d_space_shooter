@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwgrios46vh38"]
+
+[ext_resource type="Script" path="res://Scenes/others/enemy_spawner.gd" id="1_sei2c"]
+
+[sub_resource type="Curve2D" id="Curve2D_d1137"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2, 8, 0, 0, 0, 0, 1732, 5, 0, 0, 0, 0, 1735, 973, 0, 0, 0, 0, 2, 970, 0, 0, 0, 0, 2, 21)
+}
+point_count = 5
+
+[node name="enemy_spawner" type="Node"]
+process_mode = 1
+script = ExtResource("1_sei2c")
+
+[node name="enemy_spawn_timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="comet_spawner" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_d1137")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(2, 21)
+rotation = -1.5708
+progress = 5380.03
+
+[connection signal="timeout" from="enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="comet_spawner" to="." method="_on_comet_spawner_timeout"]
